@@ -1,12 +1,27 @@
 import mongoose from 'mongoose';
 
 const reviewSchema = new mongoose.Schema({
-    gameid: String,
-    userid: String,
-    rating: Number,
+    gameid: {
+        type: String,
+        required: true
+    },
+    userid: {
+        type: String,
+        required: true
+    },
+    rating: {
+        type: Number,
+        required: true
+    },
     text: String,
-    privacy: Boolean,
-    likes: [String]
+    privacy: {
+        type: Boolean,
+        required: true
+    },
+    likes: {
+        type: [String],
+        required: true
+    }
  })
 
  const Review = mongoose.model('Review', reviewSchema);

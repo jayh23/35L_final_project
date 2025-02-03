@@ -1,11 +1,23 @@
 import mongoose from 'mongoose';
 
 const listSchema = new mongoose.Schema({
-    userid: String,
+    userid: {
+        type: String,
+        required: true
+    },
     games: [String],
-    title: String,
-    privacy: Boolean,
-    type: Number // 0 owned, 1 favorites, 2 custom
+    title: {
+        type: String,
+        required: true
+    },
+    privacy: {
+        type: Boolean,
+        required: true
+    },
+    category: {
+        type: Number, // 0 owned, 1 favorites, 2 custom
+        required: true
+    }
  })
 
  const List = mongoose.model('List', listSchema);
