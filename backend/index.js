@@ -10,6 +10,10 @@ const app = express();
 // Middleware function that runs before you send response back to client
 app.use(express.json()); // allows us to accept JSON data in the req.body
 
+app.get("/", (req, res) => {
+    res.send("hi");
+});
+
 // Routes
 app.use('/api/users', userRoutes);
 

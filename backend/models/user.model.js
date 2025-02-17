@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -17,13 +18,26 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        required: true
     },
     friends: {
         type: [String],
-        required: true
     }
 })
+
+// static signup method
+userSchema.statics.signup = async function(username, password) {
+    const exists = await this.findOne({ username });
+    if (exists) {
+        throw Error('Username already in use');
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
+    const user = await this.create({ username, password: hash }); // short for new this(...).save()
+    
+    return user;
+}
 
 const User = mongoose.model('User', userSchema);
 
