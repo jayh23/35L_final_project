@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-app.use('/api/users', userRoutes);
+app.use('/api/user', userRoutes);
 
 // Connect to database
 app.listen(process.env.PORT, () => {
