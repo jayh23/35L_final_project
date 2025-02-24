@@ -1,0 +1,78 @@
+/* Full-screen layout */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Container takes full height */
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #181818;
+    border-bottom: 2px solid #444;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+  
+  .nav-links a:hover {
+    color: #00aaff;
+  }
+  
+  /* Main Sections */
+  .trending-section, .friends-section {
+    flex-grow: 1;
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  /* Game List (makes sure games display properly) */
+  .game-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  /* Game Cards */
+  .game-card {
+    width: 180px;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  
+  .game-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .game-card img {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .game-card p {
+    margin-top: 8px;
+    font-size: 14px;
+  }
+  
