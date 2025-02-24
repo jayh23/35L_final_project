@@ -1,4 +1,4 @@
-import User from '../models/user.model.js';
+import User from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
 
 // Helper function to create a JWT token with a user ID and an expiration time of 3 days.
