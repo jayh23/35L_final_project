@@ -20,6 +20,14 @@ const gameSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true
+    },
+    rating: {
+        type: Number,
+        required: true
+    },
+    reviews: {
+        type: Number,
+        required: true:
     }
  })
 
