@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import validator from 'validator';
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -8,13 +7,12 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    email: {
-        type: String,
-        unique: true
-    },
     password: {
         type: String,
         required: true
+    },
+    email: {
+        type: String,
     },
     avatar: {
         type: String,
@@ -24,10 +22,8 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-// static signup method
-userSchema.statics.signup = async function(username, email, password) {
-
-    // validation
+// Static signup method.
+userSchema.statics.signup = async function(username, password) {
     if (!username || !password) {
         throw Error('All fields must be filled.');
     }
@@ -45,28 +41,26 @@ userSchema.statics.signup = async function(username, email, password) {
         throw Error('Username already in use');
     }
 
+    // Encrypts the password.
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
-    const user = await this.create({ username, email, password: hash }); // short for new this(...).save()
+    const user = await this.create({ username, password: hash }); // short for new this(...).save()
 
     return user;
 }
 
-// static login method
+// Static login method.
 userSchema.statics.login = async function(username, password) {
     if (!username || !password) {
         throw Error('All fields must be filled.');
     }
 
+    // Checks whether the username and password match.
     const user = await this.findOne({ username });
-    if (!user) {
-        throw Error('Incorrect username.');
-    }
-
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) {
-        throw Error('Incorrect password.');
+    const match = user ? await bcrypt.compare(password, user.password) : false;
+    if (!user || !match) {
+        throw Error('Incorrect username or password.');
     }
 
     return user;

@@ -14,12 +14,15 @@ const Navbar = () => {
     return (
         <>
             <Link to="/home">Home</Link>
+
+            {/* Allows user to logout if user is signed in. */}
             {user && (
                 <span>
                     <span>{user.username}</span>
                     <button onClick={handleClick}>Log out</button>
                 </span>
             )}
+            {/* Allows user to login or signup if user is not signed in. */}
             {!user && (
                 <span>
                     <Link to="/login">Login</Link>

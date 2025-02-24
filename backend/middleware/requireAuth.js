@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.model';
 
 const requireAuth = async (req, res, next) => {
-    // verify authentication
+    // Verify authentication.
     const { authorization } = req.headers;
 
     if (!authorization) {
@@ -17,7 +17,7 @@ const requireAuth = async (req, res, next) => {
         req.user = await User.findOne({ _id }).select('_id');
         next();
 
-    } catch (err0r) {
+    } catch (error) {
         console.log(error);
         res.status(401).json({ error: 'Request is not authorized' });
     }

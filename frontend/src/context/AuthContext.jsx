@@ -2,6 +2,7 @@ import { createContext, useReducer, useEffect } from 'react'
 
 export const AuthContext = createContext();
 
+// Handles updates to the authentication state.
 export const authReducer = (state, action) => {
     switch (action.type) {
         case 'LOGIN':
@@ -14,6 +15,8 @@ export const authReducer = (state, action) => {
 }
 
 export const AuthContextProvider = ({ children }) => {
+    // Initializes the state of the user to null so that no user
+    // is logged in by default.
     const [state, dispatch] = useReducer(authReducer, {
         user: null
     });
@@ -29,6 +32,8 @@ export const AuthContextProvider = ({ children }) => {
 
     console.log('AuthContext state:', state);
 
+    // Makes the authentication state accessible to all child
+    // components wrapped inside <AuthContextProvider>.
     return (
         <AuthContext.Provider value={{ ...state, dispatch }}>
             { children }
