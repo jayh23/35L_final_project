@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import AddList from "./AddList";
-import UserList from "./UserList";
+import AddList from "./AddList.jsx";
+import UserList from "./UserList.jsx";
 
 //placeholder static data
-const list = [
+/*const list = [
     {
         user: "jane doe",
         title: "favorites",
@@ -17,14 +17,20 @@ const list = [
         gameCount: 11
     },
 ];
+*/
 
-function ListPage()
-{
+function ListPage(){
+    const [lists, setLists] = useState([]);
+
+    const addListHandler = (list) => {
+        console.log(list);
+    };
+
     return (
         <div>
-            <AddList />
-            <UserList />
+            <AddList addListHandler={addListHandler} />
+            <UserList lists={lists} />
         </div>
-    )
+    );
 }
-export default ListPage
+export default ListPage;

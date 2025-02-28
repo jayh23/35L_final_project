@@ -1,13 +1,15 @@
 import React from 'react';
 
-const CardList = (props) => {
+const ListCard = (props) => {
     const {title, description} = props.list;
     return(
+        <>
         <div>
-                <h1>{list.title}</h1>
-                <div>{list.description}</div>
+                <h1>{title}</h1>
+                <div>{description}</div>
             </div>
-            /* add image for list */
+        </>
+
     );
 };
 

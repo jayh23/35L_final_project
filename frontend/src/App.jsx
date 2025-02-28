@@ -1,13 +1,13 @@
-import { useState } from 'react'
+//import { useState } from 'react'
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
 import './App.css'
-import ListPage from "./components/ListPage"
+import ListPage from "./components/ListPage.jsx"
  
 function App() {
  // const [count, setCount] = useState(0)
-
-  /*return (
+ /*
+  return (
     <>
       <div>
         <a href="https://vite.dev" target="_blank">
@@ -34,10 +34,10 @@ function App() {
      */
 
 
-return(
-  <div>
+return (
+  <>
     <ListPage />
-  </div>
+  </>
   ) 
 }
  
