@@ -17,10 +17,6 @@ const reviewSchema = new mongoose.Schema({
     privacy: {
         type: Boolean,
         required: true
-    },
-    likes: {
-        type: [String],
-        required: true
     }
  })
 

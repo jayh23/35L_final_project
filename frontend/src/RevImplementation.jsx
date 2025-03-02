@@ -2,8 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import GameReviews from "./components/GameReviews";
 import UserReviews from "./components/UserReviews";
@@ -33,7 +31,7 @@ console.log("Mock Review Data:", mockReview);
 
 
 
-function App () {
+function RevImplementation () {
   /*
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -117,4 +115,4 @@ const UserReviewsPage = () => {
   );
 }
 
-export default App;
+export default RevImplementation;

@@ -1,0 +1,105 @@
+
+
+.review-container{
+padding: 24px;
+max-width: 800px;
+margin: 0 auto;
+}
+/*h1for Reviews for xyz"*/
+.review-heading{
+font-size:1.5 rem; 
+font-weight: bold;
+margin-bottom: 16px;
+}
+
+/*h2 for "Enter a Review" and "All Reviews"*/
+.review-subheading{
+text-align: left;
+}
+
+.submit-form{
+    border: 2px solid #ccc; 
+    padding: 20px; 
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    max-width: 500px; 
+    margin: 20px auto;
+    background-color:#132743;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user-name{
+
+    margin:0; 
+    color: #ffcbcb;
+    text-align: left; 
+}
+
+.selection-button{
+    margin-right: 400px;
+        padding: 5px;
+        border-radius: 10px;
+        border: 1px solid #ccc; 
+        color: black; 
+        background-color:#ffcbcb; 
+}
+
+.text-box{
+    padding: 10px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+    height: 150px; 
+
+}
+
+.submit-button{
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffb5b5;
+    cursor: pointer;
+    font-size: 16px;
+    color: black;
+}
+
+.review-display {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0; 
+    color: white;
+    background-color:  #132743;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+  
+    margin-bottom: 10px;
+}
+
+.review-info{
+    margin: 0;
+    text-align: left;
+    color: #ffcbcb; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    align-items: left;
+   
+    margin-bottom: 10px;
+
+}
+
+.review-text{
+    margin-top: 10px;
+    text-align: left;
+    white-space: pre-wrap; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    align-items: left; 
+    margin-bottom: 10px;
+
+}
+
