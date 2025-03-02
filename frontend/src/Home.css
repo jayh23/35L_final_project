@@ -1,78 +1,159 @@
 /* Full-screen layout */
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-color: #121212;
-    color: white;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Container takes full height */
-  .home-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    padding: 20px;
-  }
-  
-  /* Navbar */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #181818;
-    border-bottom: 2px solid #444;
-  }
-  
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-  }
-  
-  .nav-links a:hover {
-    color: #00aaff;
-  }
-  
-  /* Main Sections */
-  .trending-section, .friends-section {
-    flex-grow: 1;
-    margin-top: 30px;
-    text-align: center;
-  }
-  
-  /* Game List (makes sure games display properly) */
-  .game-list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 10px;
-  }
-  
-  /* Game Cards */
-  .game-card {
-    width: 180px;
-    background-color: #222;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    transition: transform 0.2s;
-  }
-  
-  .game-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .game-card img {
-    width: 100%;
-    border-radius: 5px;
-  }
-  
-  .game-card p {
-    margin-top: 8px;
-    font-size: 14px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #121212;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Container takes full height */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #181818;
+  border-bottom: 2px solid #444;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.nav-links a:hover {
+  color: #00aaff;
+}
+
+/* Main Sections */
+.trending-section, .friends-section {
+  flex-grow: 1;
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* Game List (makes sure games display properly) */
+.game-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* Game Cards */
+.game-card {
+  width: 180px;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.game-card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.game-card p {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+  overflow: hidden;
+  /* Add left/right padding so arrows won't overlap the cards */
+  padding: 0 60px; 
+  box-sizing: border-box;
+}
+
+/* Actual carousel (scrollable) */
+.carousel {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  /* The height of the carousel is determined by the items. 
+     If needed, you can fix a height or rely on the .game-card's size. */
+}
+
+.carousel::-webkit-scrollbar {
+display: none;        /* Hide the scrollbar in Chrome/Safari/Opera */
+}
+
+/* Game cards */
+.game-card {
+min-width: 180px;       /* Enough width to see each card */
+background-color: #222;
+padding: 10px;
+border-radius: 10px;
+text-align: center;
+flex-shrink: 0;         /* Prevent the card from shrinking */
+transition: transform 0.2s;
+}
+
+.game-card:hover {
+transform: scale(1.05);
+}
+
+.game-card img {
+width: 100%;
+border-radius: 5px;
+}
+
+.game-card p {
+margin-top: 8px;
+font-size: 14px;
+}
+
+/* Arrow buttons */
+.arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(34, 34, 34, 0.7);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  outline: none;
+  transition: background-color 0.3s, opacity 0.3s;
+  opacity: 0.7;
+}
+
+.arrow-btn:hover {
+  opacity: 1;
+  background-color: rgba(34, 34, 34, 0.9);
+}
+
+/* Position the left button at the left edge */
+.arrow-btn.left {
+  left: 0.5rem;
+}
+
+/* Position the right button at the right edge */
+.arrow-btn.right {
+  right: 0.5rem;
+}

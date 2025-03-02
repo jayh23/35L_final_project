@@ -1,35 +1,32 @@
+// Example
 import express from 'express';
 import dotenv from 'dotenv';
 
+import cors from 'cors'; // <-- import cors
+
 import { connectDB } from './config/db.js';
+import Game from './models/game.model.js';
 
 dotenv.config();
-
 const app = express();
 
-// Middleware function that runs before you send response back to client
-app.use(express.json()); // allows us to accept JSON data in the req.body
+// Enable CORS for all requests
+app.use(cors()); // <-- add this line
+app.use(express.json());
+
+app.use(express.json());
 
 app.listen(process.env.PORT, () => {
-    connectDB();
-    console.log("Server started at http://localhost:" + process.env.PORT);
+  connectDB();
+  console.log('Server listening on port ' + process.env.PORT);
 });
 
-// API Endpoints
-app.get("/api/games/trending", async (req, res) => {
-    try {
-      const trendingGames = await Game.find().limit(10);
-      res.json(trendingGames);
-    } catch (error) {
-      res.status(500).json({ error: "Failed to fetch trending games" });
-    }
-  });
-  
-  app.get("/api/games/popular-with-friends", async (req, res) => {
-    try {
-      const popularGames = await Game.find().limit(10);
-      res.json(popularGames);
-    } catch (error) {
-      res.status(500).json({ error: "Failed to fetch popular games" });
-    }
-  });
+// Example route
+app.get('/api/games', async (req, res) => {
+  try {
+    const allGames = await Game.find();
+    return res.json(allGames);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
