@@ -1,26 +1,29 @@
 import React from 'react';
+import { Navigate } from './Navigate'; 
+
 class AddList extends React.Component{
     state = {
-        title: " ",
-        description: " ",
+        title: "",
+        description: "",
     };
 
     add = (e) => {
         e.preventDefault();
-        if(this.state.title === " " || this.state.description === " "){
+        if(this.state.title === "" || this.state.description === ""){
             alert("All fields are mandatory");
             return;
         }
         this.props.addListHandler(this.state);
-        console.log(this.state);
+        this.setState({title: "", description: ""});
+        this.props.navigate("/");
     };
 
     render(){
         return(
-            <div>
+            <div className="ui main">
                 <h2> Create a New List!</h2>
-                <form onSubmit={this.add}>
-                    <div>
+                <form className="ui form" onSubmit={this.add}>
+                    <div className="field">
                         <label>Title</label>
                         <input 
                             type="text" 
@@ -30,7 +33,7 @@ class AddList extends React.Component{
                             onChange={(e) => this.setState({title: e.target.value})}
                         />
                     </div>
-                    <div>
+                    <div className="field">
                         <label>Description</label>
                         <input 
                             type="text" 
@@ -47,4 +50,4 @@ class AddList extends React.Component{
     }
 
 }
-export default AddList;
+export default Navigate(AddList);
