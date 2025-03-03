@@ -5,10 +5,10 @@ import { signupUser, loginUser } from '../controllers/userController.js';
 
 const router = express.Router();
 
-// Login route.
+// (POST) Login route.
 router.post('/login', loginUser);
 
-// Signup route.
+// (POST) Signup route.
 router.post('/signup', signupUser);
 
 export default router;
