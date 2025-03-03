@@ -4,6 +4,7 @@ import { connectDB } from './config/db.js';
 
 import userRoutes from './routes/userRoute.js';
 import gameRoutes from './routes/gameRoute.js';
+import reviewRoutes from './routes/reviewRoute.js';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 // Routes
 app.use('/api/user', userRoutes);
 app.use('/api/games', gameRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 // Connect to database
 app.listen(process.env.PORT, () => {

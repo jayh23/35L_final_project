@@ -13,7 +13,9 @@ const reviewSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    text: String,
+    text: {
+        type: String,
+    },
     privacy: {
         type: Boolean,
         required: true
@@ -22,7 +24,7 @@ const reviewSchema = new mongoose.Schema({
         type: [String],
         required: true
     }
- })
+ }, { timestamps: true });
 
  const Review = mongoose.model('Review', reviewSchema);
 
