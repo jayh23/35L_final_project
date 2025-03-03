@@ -9,7 +9,7 @@ import Signup from './pages/Signup'
 
 function App() {
     const { user } = useAuthContext()
-//<Route path="/profile" element={<Profile />} />
+
     return (
         <>
             <Navbar />
