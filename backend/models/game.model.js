@@ -21,13 +21,13 @@ const gameSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    rating: {
+    sumrating: {
         type: Number,
         required: true
     },
     reviews: {
         type: Number,
-        required: true:
+        required: true
     }
  })
 

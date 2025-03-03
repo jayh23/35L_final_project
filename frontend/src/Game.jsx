@@ -26,20 +26,33 @@ const Game = (gameId) => {
             .catch((err) => console.error("Error fetching game:", err));
     }, [gameId]);
 
+    const handleClick = (listType) => {
+        // listType should be 0 or 1
+        if (listType != 0 && listType != 1) console.err("Invalid list type");
+        // TODO: Use add-to-list function
+    }
+
     
     return (
         <>
             <body>
-                <div className="info">
-                    <h1>{game.title}</h1>
+                <div className="leftcol">
                     <image src={game.image} />
-                    <p>Rating: {game.rating}</p> {/* Would be cool to display rating in stars*/}
                     <p>Release date: {game.year}</p>
-                    <p>Tags: </p>
+                    {/* Would be cool to display rating in stars*/}
+                    <p>Rating: {Math.round(game.sumrating / game.reviews)}</p>
+                    {/* Not sure what to do about these */}
+                    <button onClick={() => handleClick(0)}>Add to library</button>
+                    <button onClick={() => handleClick(1)}>Add to favorites</button>
+                </div>
+                <div className="rightcol">
+                    <h1>{game.title}</h1>
+                    <div className="scroll">
                     <Tags tags={game.genre} />
                     <p>{game.description}</p>
+                    {/* <Review /> */}
+                    </div>
                 </div>
-                {/* <Review /> */}
             </body>
         </>
     );
