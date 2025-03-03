@@ -1,44 +1,43 @@
-﻿import React from "react";
+﻿import React, { useEffect, useState, useRef } from "react";
 // import Review from ; // Mahima
 
 const Tags = ({ tags }) => {
-    function handleClick(e) {
-        e.preventDefault();
-        {/*Redirect to tag page?*/}
-    }
+    const handleClick = (tag) => {
+        // Redirect to genre page. Might not end up using this
+        window.location.href = `/genre/${tag}`;
+    };
 
     return (
         <>
-            {tags.map((tags) => (
-                <button onClick={this.handleClick}>{tags}</button>
+            {tags.map((tag, index) => (
+                <button key={index} onClick={() => handleClick(tag)} className="tag">{tag}</button>
             ))}
         </>
     );
-}
+};
 
-const Game = () => {
-    // Everything placeholder
-    // game.model has title, date, genre, image
+const Game = (gameId) => {
+    const [game, setGame] = useState(null);
+
+    useEffect(() => {
+        fetch(`http://localhost:5001/api/games/${gameId}`)
+            .then((res) => res.json())
+            .then((data) => setGame(data))
+            .catch((err) => console.error("Error fetching game:", err));
+    }, [gameId]);
+
     
-    let title = "GAME TITLE";
-    let cover = "COVER IMAGE";
-    let rating = 5.0;
-    let date = 1850;
-    let genre = ["GENRE_1", "GENRE_2", "GENRE_3"];
-    let desc = "DESCRIPTION";
     return (
         <>
             <body>
-            <div class="info">
-                <h1>{title}</h1>
-                    <image src={`${cover}`} />
-                    <p>Rating: {rating}</p> {/* Would be cool to display rating in stars*/}
-                <p>Release date: {date}</p>
+                <div className="info">
+                    <h1>{game.title}</h1>
+                    <image src={game.image} />
+                    <p>Rating: {game.rating}</p> {/* Would be cool to display rating in stars*/}
+                    <p>Release date: {game.year}</p>
                     <p>Tags: </p>
-                    <Tags tags={genre} />
-                {/*Not sure yet how to display variable length tag list.
-                    May require making a new element type (<tag /> ?) */}
-                <p>{desc}</p>
+                    <Tags tags={game.genre} />
+                    <p>{game.description}</p>
                 </div>
                 {/* <Review /> */}
             </body>

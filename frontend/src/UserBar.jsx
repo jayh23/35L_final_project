@@ -15,6 +15,7 @@ const UserBar = () => { // Like a navbar for userpage
             </div>
             <div class="links">
                 <Link to="/library">Library</Link>
+                <Link to="/favorites">Favorites</Link>
                 <Link to="/reviews">Reviews</Link>
                 <Link to="/friends">Friends</Link>
             </div>
