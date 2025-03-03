@@ -7,6 +7,7 @@ import cors from 'cors'; // <-- import cors
 import { connectDB } from './config/db.js';
 import Game from './models/game.model.js';
 
+
 dotenv.config();
 const app = express();
 
@@ -16,6 +17,14 @@ app.use(express.json());
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.send("hi");
+});
+
+// Routes
+app.use('/api/user', userRoutes);
+
+// Connect to database
 app.listen(process.env.PORT, () => {
   connectDB();
   console.log('Server listening on port ' + process.env.PORT);

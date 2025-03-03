@@ -16,6 +16,11 @@ dist-ssr
 
 # Editor directories and files
 .vscode/*
+<<<<<<< Updated upstream
+.vs/
+=======
+.vs/*
+>>>>>>> Stashed changes
 !.vscode/extensions.json
 .idea
 .DS_Store
@@ -24,3 +29,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vs/35L_final_project/v17/DocumentLayout.backup.json

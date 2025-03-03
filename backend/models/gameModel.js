@@ -16,22 +16,11 @@ const gameSchema = new mongoose.Schema({
     genre: {
         type: [String],
         required: true
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    sumrating: {
-        type: Number,
-        required: true
-    },
-    reviews: {
-        type: Number,
-        required: true
     }
  })
 
  const Game = mongoose.model('Game', gameSchema);
 
  export default Game;
+
  
