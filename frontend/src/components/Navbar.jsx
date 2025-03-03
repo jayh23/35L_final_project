@@ -18,7 +18,7 @@ const Navbar = () => {
             {/* Allows user to logout if user is signed in. */}
             {user && (
                 <span>
-                    <span>{user.username}</span>
+                    <Link to="/profile">{user.username}</Link>
                     <button onClick={handleClick}>Log out</button>
                 </span>
             )}

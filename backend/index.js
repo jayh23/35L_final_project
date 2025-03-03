@@ -1,7 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
+
 import userRoutes from './routes/userRoute.js';
+import gameRoutes from './routes/gameRoute.js';
 
 dotenv.config();
 
@@ -16,6 +18,7 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use('/api/user', userRoutes);
+app.use('/api/games', gameRoutes);
 
 // Connect to database
 app.listen(process.env.PORT, () => {
