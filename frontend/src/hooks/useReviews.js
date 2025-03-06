@@ -54,6 +54,29 @@ export const useReviews = (gameid, userid) => {
     }
   };
 
-  return { reviews, isLoading, error, submitReview };
+  const deleteReview = async (reviewId) => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+        const response = await fetch(`/api/reviews/${reviewId}`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) throw new Error('Failed to delete review');
+
+        // Remove the deleted review from the state
+        setReviews((prevReviews) =>
+            prevReviews.filter((review) => review._id !== reviewId)
+        );
+    } catch (err) {
+        setError(err.message);
+    } finally {
+        setIsLoading(false);
+    }
+};
+
+
+  return { reviews, isLoading, error, submitReview, deleteReview };
 };
 

@@ -4,6 +4,11 @@ import Review from '../models/reviewModel.js';
 
 // Get all reviews, sorted by newest.
 export const getReviews = async (req, res) => {
+    const { gameid, userid } = req.query;
+    const query = {};
+    if (gameid) query.gameid = gameid;
+    if (userid) query.userid = userid;
+    
     try {
         const reviews = await Review.find({}).sort({ createdAt: -1 });
 

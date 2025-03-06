@@ -1,6 +1,6 @@
 import  {useReviews}  from "../hooks/useReviews.js";
 import { useState } from "react";
-import "./Review.css";
+import "../styles/Review.css";
 
 const ReviewForm = ({ gameid, userid, currentUsername }) => {
   const { submitReview, isLoading, error } = useReviews(gameid, userid);

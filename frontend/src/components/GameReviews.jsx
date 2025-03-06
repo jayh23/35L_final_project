@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import  {useReviews}  from "../hooks/useReviews.js";
-import "./Review.css";
+import "../styles/Review.css";
 
 const GameReviews = ({ gameid, gameTitle }) => {
   const { reviews, isLoading, error } = useReviews(gameid, null);

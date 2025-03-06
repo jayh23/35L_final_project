@@ -63,7 +63,7 @@ const Game = (gameId) => {
                     <div className="scroll">
                     <Tags tags={game.genre} />
                     <p>{game.description}</p>
-                    {/* <Review /> */}
+                    <GameReviews gameid={gameId} gameTitle={game.title} />
                     </div>
                 </div>
             </body>

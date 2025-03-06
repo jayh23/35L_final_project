@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import  {useReviews}  from "../hooks/useReviews.js";
-import "./Review.css";
+import "../styles/Review.css";
 
 
 const UserReviews = ({ userid, username }) => {
-  const { reviews, isLoading, error } = useReviews(null, userid);
+  const { reviews, isLoading, error, deleteReview } = useReviews(null, userid);
+  const { user } = useAuthContext(); 
+
+  const handleDelete = async (reviewId) => {
+    if (window.confirm('Are you sure you want to delete this review?')) {
+        await deleteReview(reviewId);
+    }
+};
 
   return (
     <div>
@@ -14,6 +21,17 @@ const UserReviews = ({ userid, username }) => {
       {reviews.length > 0 ? (
         reviews.map((review, index) => (
           <div key={index} className="review-display">
+            
+            {user && user._id === review.userid && (
+                            <button
+                                className="delete-button"
+                                onClick={() => handleDelete(review._id)}
+                            >
+                                🗑️
+                            </button>
+                        )}
+
+
             <h3 className="review-info">{review.username}</h3>
             <h4 className="review-info">{review.rating} ⭐</h4>
             <p className="game-title">Game ID: {review.gameid}</p>
