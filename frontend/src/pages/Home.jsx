@@ -1,5 +1,5 @@
-
 import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";  // <-- import Link
 import "../styles/Home.css";
 
 const Home = () => {
@@ -11,16 +11,16 @@ const Home = () => {
 
   useEffect(() => {
     const fetchGames = async () => {
-        const response = await fetch('/api/games');
-        const data = await response.json();
-        
-        if (response.ok) {
-            setGames(data.data);
-        }
-    }
+      const response = await fetch("/api/games");
+      const data = await response.json();
+
+      if (response.ok) {
+        setGames(data.data);
+      }
+    };
 
     fetchGames();
-}, []);
+  }, []);
 
   // Helper functions to scroll left/right
   const scrollLeft = (ref) => {
@@ -52,10 +52,10 @@ const Home = () => {
           <div className="carousel" ref={trendingRef}>
             {games.length > 0 ? (
               games.map((game) => (
-                <div key={game._id} className="game-card">
+                <Link to={`/games/${game._id}`} key={game._id} className="game-card">
                   <img src={game.image} alt={game.title} />
                   <p>{game.title}</p>
-                </div>
+                </Link>
               ))
             ) : (
               <p>No trending games available.</p>
@@ -83,10 +83,10 @@ const Home = () => {
           <div className="carousel" ref={friendsRef}>
             {games.length > 0 ? (
               games.map((game) => (
-                <div key={game._id} className="game-card">
+                <Link to={`/games/${game._id}`} key={game._id} className="game-card">
                   <img src={game.image} alt={game.title} />
                   <p>{game.title}</p>
-                </div>
+                </Link>
               ))
             ) : (
               <p>No popular games with friends available.</p>

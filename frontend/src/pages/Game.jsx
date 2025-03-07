@@ -1,74 +1,91 @@
-﻿import React, { useEffect, useState, useRef } from "react";
-import Dropdown from 'react-bootstrap/Dropdown';
-// import Review from ; // Mahima
+﻿import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+//import Dropdown from "react-bootstrap/Dropdown";
+// import Review from '...'; // Mahima
 
 const Tags = ({ tags }) => {
-    const handleClick = (tag) => {
-        // Redirect to genre page. Might not end up using this
-        window.location.href = `/genre/${tag}`;
-    };
+  const handleClick = (tag) => {
+    // Redirect to a genre page (to be implemented later)
+    window.location.href = `/genre/${tag}`;
+  };
 
-    return (
-        <>
-            {tags.map((tag, index) => (
-                <button key={index} onClick={() => handleClick(tag)} className="tag">{tag}</button>
-            ))}
-        </>
-    );
+  return (
+    <div>
+      {tags.map((tag, index) => (
+        <button key={index} onClick={() => handleClick(tag)} className="tag">
+          {tag}
+        </button>
+      ))}
+    </div>
+  );
 };
 
+// Placeholder for potential add-to-list functionality
 const addList = () => {
-    const [game, setGame] = useState([]);
+  // This function can be expanded later if needed.
+};
 
-    useEffect(() => {
-        fetch(`http://localhost:5001/api/`)
-            .then((res) => res.json())
-            .then((data) => setGame(data))
-            .catch((err) => console.error("Error fetching game:", err));
-    }, []);
-}
+const Game = () => {
+  const { gameId } = useParams(); // retrieve the :gameId from the URL
+  const [game, setGame] = useState(null);
+  const [error, setError] = useState(null);
 
-const Game = (gameId) => {
-    const [game, setGame] = useState(null);
+  useEffect(() => {
+    const fetchGame = async () => {
+      try {
+        const response = await fetch(`/api/games/${gameId}`);
+        const data = await response.json();
 
-    useEffect(() => {
-        fetch(`http://localhost:5001/api/games/${gameId}`)
-            .then((res) => res.json())
-            .then((data) => setGame(data))
-            .catch((err) => console.error("Error fetching game:", err));
-    }, [gameId]);
+        if (!response.ok) {
+          throw new Error(data.message || "Failed to fetch game");
+        }
 
-    const handleClick = (listType) => {
-        // listType should be 0 or 1
-        if (listType != 0 && listType != 1) console.err("Invalid list type");
-        // TODO: Use add-to-list function
+        // Assuming your API returns { data: game }
+        setGame(data.data || data);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchGame();
+  }, [gameId]);
+
+  const handleClick = (listType) => {
+    // listType should be 0 (library) or 1 (favorites)
+    if (listType !== 0 && listType !== 1) {
+      console.error("Invalid list type");
+      return;
     }
+    // TODO: Implement add-to-list functionality here
+  };
 
-    
-    return (
-        <>
-            <body>
-                <div className="leftcol">
-                    <image src={game.image} />
-                    <p>Release date: {game.year}</p>
-                    {/* Would be cool to display rating in stars*/}
-                    <p>Rating: {Math.round(game.sumrating / game.reviews)}</p>
-                    {/* Not sure what to do about these */}
-                    <button onClick={() => handleClick(0)}>Add to library</button>
-                    <button onClick={() => handleClick(1)}>Add to favorites</button>
-                    <></>
-                </div>
-                <div className="rightcol">
-                    <h1>{game.title}</h1>
-                    <div className="scroll">
-                    <Tags tags={game.genre} />
-                    <p>{game.description}</p>
-                    {/* <Review /> */}
-                    </div>
-                </div>
-            </body>
-        </>
-    );
-}
+  if (error) {
+    return <p style={{ color: "red" }}>Error: {error}</p>;
+  }
+
+  if (!game) {
+    return <p>Loading...</p>;
+  }
+
+  return (
+    <div className="game-page">
+      <div className="leftcol">
+        <img src={game.image} alt={game.title} />
+        <p>Release date: {game.year}</p>
+        {/* Would be cool to display rating in stars */}
+        <p>Rating: {Math.round(game.sumscore / game.numreviews)}</p>
+        <button onClick={() => handleClick(0)}>Add to library</button>
+        <button onClick={() => handleClick(1)}>Add to favorites</button>
+      </div>
+      <div className="rightcol">
+        <h1>{game.title}</h1>
+        <div className="scroll">
+          <Tags tags={game.genre} />
+          <p>{game.description}</p>
+          {/* <Review /> could go here in the future */}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Game;
