@@ -19,13 +19,13 @@ const gameSchema = new mongoose.Schema({
     },
 
     sumscore: {
-        type: float,
+        type: Number,
         default: 0,
         required: true
     },
 
     numreviews: {
-        type: int,
+        type: Number,
         default: 0,
         required: true
     }
