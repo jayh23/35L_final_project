@@ -37,15 +37,6 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Navbar */}
-      <nav className="navbar">
-        <h1>GameBoxd</h1>
-        <div className="nav-links">
-          <a href="/search">Search</a>
-          <a href="/friends">Friends</a>
-          <a href="/profile">Profile</a>
-        </div>
-      </nav>
 
       {/* Trending Games */}
       <section className="trending-section">
