@@ -60,10 +60,19 @@ body, html {
   border-radius: 10px;
   text-align: center;
   transition: transform 0.2s;
+  
+  text-decoration: none;
+  color: #fff; 
 }
 
 .game-card:hover {
   transform: scale(1.05);
+  color: #ccc;
+}
+
+
+.game-card:visited {
+  color: #fff;
 }
 
 .game-card img {
@@ -74,7 +83,9 @@ body, html {
 .game-card p {
   margin-top: 8px;
   font-size: 14px;
+  color: inherit; 
 }
+
 
 
 .carousel-container {
