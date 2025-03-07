@@ -1,7 +1,7 @@
 import express from 'express';
 
 // Controller functions.
-import { signupUser, loginUser } from '../controllers/userController.js';
+import { signupUser, loginUser, searchUsers} from '../controllers/userController.js';
 
 const router = express.Router();
 
@@ -10,5 +10,8 @@ router.post('/login', loginUser);
 
 // (POST) Signup route.
 router.post('/signup', signupUser);
+
+router.get('/search', searchUsers);
+
 
 export default router;

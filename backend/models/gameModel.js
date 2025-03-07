@@ -16,6 +16,18 @@ const gameSchema = new mongoose.Schema({
     genre: {
         type: [String],
         required: true
+    },
+
+    sumscore: {
+        type: float,
+        default: 0,
+        required: true
+    },
+
+    numreviews: {
+        type: int,
+        default: 0,
+        required: true
     }
  })
 
