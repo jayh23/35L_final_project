@@ -41,3 +41,24 @@ export const signupUser = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 }
+
+export const searchUsers = async (req, res) => {
+    const { username } = req.query;
+    
+    // If username query is missing or blank, return an empty list
+    if (!username || username.trim() === "") {
+      return res.status(200).json({ users: [] });
+    }
+  
+    try {
+      // Find users whose username contains the input string (case-insensitive)
+      const users = await User.find({
+        username: { $regex: username, $options: 'i' }
+      }).select('username');
+  
+      res.status(200).json({ users });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  
