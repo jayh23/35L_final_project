@@ -1,9 +1,11 @@
 import  {useReviews}  from "../hooks/useReviews.js";
+import { useAuthContext } from "../hooks/useAuthContext.js"; // Import useAuthContext
 import { useState } from "react";
 import "../styles/Review.css";
 
-const ReviewForm = ({ gameid, userid, currentUsername }) => {
-  const { submitReview, isLoading, error } = useReviews(gameid, userid);
+const ReviewForm = ({ gameid }) => {
+  const { user } = useAuthContext(); // Get the logged-in user
+  const { submitReview, isLoading, error } = useReviews(gameid, user.token);
   const [text, setText] = useState("");
   const [rating, setRating] = useState(5);
   const [privacy, setPrivacy] = useState(false);
@@ -12,7 +14,7 @@ const ReviewForm = ({ gameid, userid, currentUsername }) => {
     e.preventDefault();
     if (!text.trim()) return;
 
-    await submitReview({ gameid, userid, rating, text, privacy });
+    await submitReview({ gameid, userid:user.token, rating, text, privacy });
 
     setText("");
     setRating(5);
@@ -24,7 +26,7 @@ const ReviewForm = ({ gameid, userid, currentUsername }) => {
       <h2 className="review-subheading">Enter a review:</h2>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit} className="submit-form">
-        <h2 className="user-name">{currentUsername}</h2>
+        <h2 className="user-name">{user.username}</h2>
 
         <select
           value={rating}

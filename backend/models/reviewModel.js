@@ -9,6 +9,18 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    username: {
+        type: String,
+        required: true
+    },
+    gamename: {
+        type: String,
+        required: true
+    },
+    gameimage: {
+        type: String,
+        required: true
+    },
     rating: {
         type: Number,
         required: true

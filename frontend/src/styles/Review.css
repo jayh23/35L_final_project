@@ -3,13 +3,15 @@
 .review-container{
 padding: 24px;
 max-width: 800px;
-margin: 0 auto;
+margin: 0 auto ;
 }
 /*h1for Reviews for xyz"*/
 .review-heading{
 font-size:1.5 rem; 
 font-weight: bold;
 margin-bottom: 16px;
+color: #ffcbcb; 
+margin-left: 30px; 
 }
 
 /*h2 for "Enter a Review" and "All Reviews"*/
@@ -67,15 +69,19 @@ text-align: left;
 .review-display {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 0; 
+    border-radius: 10px;
+    margin: 20px 0; 
     color: white;
     background-color:  #132743;
     display: flex;
     flex-direction: column; 
     justify-content: space-between;
-  
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    max-width: 800px; 
+    margin-left: 30px; 
+   
+    
+    
 }
 
 .review-info{
@@ -118,6 +124,7 @@ text-align: left;
     color: #cc0000;
 }
 
+/*
 .review-display {
     position: relative;
     border: 1px solid #ccc;
@@ -126,3 +133,4 @@ text-align: left;
     border-radius: 5px;
 }
 
+*/
