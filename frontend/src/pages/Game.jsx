@@ -1,7 +1,6 @@
 ﻿import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-//import Dropdown from "react-bootstrap/Dropdown";
-// import Review from '...'; // Mahima
+import "../styles/Game.css"; // <-- Import your dedicated Game page stylesheet
 
 const Tags = ({ tags }) => {
   const handleClick = (tag) => {
@@ -10,19 +9,14 @@ const Tags = ({ tags }) => {
   };
 
   return (
-    <div>
+    <div className="tag-container">
       {tags.map((tag, index) => (
-        <button key={index} onClick={() => handleClick(tag)} className="tag">
+        <button key={index} onClick={() => handleClick(tag)} className="tag-button">
           {tag}
         </button>
       ))}
     </div>
   );
-};
-
-// Placeholder for potential add-to-list functionality
-const addList = () => {
-  // This function can be expanded later if needed.
 };
 
 const Game = () => {
@@ -69,19 +63,32 @@ const Game = () => {
   return (
     <div className="game-page">
       <div className="leftcol">
-        <img src={game.image} alt={game.title} />
+        <img src={game.image} alt={game.title} className="game-cover" />
         <p>Release date: {game.year}</p>
-        {/* Would be cool to display rating in stars */}
         <p>Rating: {Math.round(game.sumscore / game.numreviews)}</p>
-        <button onClick={() => handleClick(0)}>Add to library</button>
-        <button onClick={() => handleClick(1)}>Add to favorites</button>
+        
+        {/* 
+          Future Implementation:
+          - These buttons will add the game to the user's library or favorites.
+        */}
+        <button onClick={() => handleClick(0)} className="library-btn">
+          Add to library
+        </button>
+        <button onClick={() => handleClick(1)} className="favorite-btn">
+          Add to favorites
+        </button>
       </div>
+
       <div className="rightcol">
-        <h1>{game.title}</h1>
-        <div className="scroll">
+        <h1 className="game-title">{game.title}</h1>
+        
+        <div className="scrollable-content">
           <Tags tags={game.genre} />
-          <p>{game.description}</p>
-          {/* <Review /> could go here in the future */}
+          <p className="game-description">{game.description}</p>
+          {/* 
+            Future Implementation:
+            - Reviews go here
+          */}
         </div>
       </div>
     </div>
