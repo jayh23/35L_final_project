@@ -1,8 +1,33 @@
 import { useEffect, useState } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
+
 
 const Profile = () => {
     const [games, setGames] = useState([]);
     const [reviews, setReviews] = useState([]);
+    const [friends, setFriends] = useState([]);
+
+    const { user } = useAuthContext();
+
+        // Fetch friends list
+        useEffect(() => {
+            const fetchFriends = async () => {
+                if (!user) return;
+                
+                const response = await fetch('/api/games', {
+                    headers: {
+                        'Authorization': `Bearer ${user.token}`
+                    }
+                });
+                const data = await response.json();
+                
+                if (response.ok) {
+                    setFriends(data.friends);
+                }
+            };
+            
+            fetchFriends();
+        }, [user]);
 
     useEffect(() => {
         const fetchGames = async () => {

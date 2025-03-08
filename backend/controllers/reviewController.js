@@ -61,7 +61,7 @@ export const deleteReview = async (req, res) => {
     }
 
     try {
-        const deletedReview = await Review.findByIdAndDelete({ _id: id });
+        const deletedReview = await Review.findByIdAndDelete(id);
 
         res.status(200).json({ data: deletedReview });
     } catch (error) {

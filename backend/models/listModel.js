@@ -15,10 +15,10 @@ const listSchema = new mongoose.Schema({
         required: true
     },
     category: {
-        type: Number, // 0 owned, 1 favorites, 2 custom
+        type: String, // 0 owned, 1 favorites, 2 custom
         required: true
     }
- })
+ });
 
  const List = mongoose.model('List', listSchema);
 
