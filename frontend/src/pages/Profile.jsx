@@ -18,7 +18,6 @@ const Profile = () => {
     const { getFriends } = useUserService();
 
     useEffect(() => {
-        console.log(user);
         getAllLists().then(setLists);
         getOneUserReviews().then(setReviews);
         getFriends().then(setFriends);
