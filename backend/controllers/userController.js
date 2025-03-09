@@ -6,8 +6,6 @@ const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' });
 }
 
-
-
 // Login user.
 export const loginUser = async (req, res) => {
     const { username, password } = req.body;
@@ -15,15 +13,13 @@ export const loginUser = async (req, res) => {
     try {
         // Attempt to find and authenticate the user with the provided credentials.
         const user = await User.login(username, password);
-        
-      
-        // If authentication is successful, create a JWT token for the user.
-        const token = createToken(user._id);
-        console.log(token); 
         const userId = user._id;
 
+        // If authentication is successful, create a JWT token for the user.
+        const token = createToken(user._id);
+
         // Send a response with the username and generated token.
-        res.status(200).json({ username, token, userId});
+        res.status(200).json({ username, token, userId });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -36,14 +32,13 @@ export const signupUser = async (req, res) => {
     try {
         // Attempt to create a new user by calling the signup method in the User model.
         const user = await User.signup(username, password);
-       
-       
-        // If signup is successful, create a JWT token for the new user.
-        const token = createToken(user._id);
         const userId = user._id;
 
+        // If signup is successful, create a JWT token for the new user.
+        const token = createToken(user._id);
+
         // Send a response with the username and generated token.
-        res.status(200).json({ username, token, userId});
+        res.status(200).json({ username, token, userId });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

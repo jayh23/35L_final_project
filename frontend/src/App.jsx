@@ -8,6 +8,9 @@ import Profile from './pages/Profile'
 import Friends from './pages/Friends'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import SearchResults from './pages/SearchResults'
+import GenrePage from './pages/GenrePage';  // Import the new GenrePage
+
 
 function App() {
     const { user } = useAuthContext()
@@ -17,11 +20,14 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/home" element={<Home />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
                 <Route path="/friends" element={user ? <Friends /> : <Navigate to="/login" />} />
                 <Route path="/login" element={!user ? <Login /> : <Navigate to="/home" />} />
                 <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/home" />} />
                 <Route path="/games/:gameId" element={<Game />} />
+                <Route path="/search" element={<SearchResults />} />
+                <Route path="/genre/:genreName" element={<GenrePage />} />
+
             </Routes>
 
         </>

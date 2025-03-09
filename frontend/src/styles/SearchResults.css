@@ -1,0 +1,31 @@
+.game-grid {
+    display: grid;
+    /* Create five equal-width columns; if there aren't enough items, the grid will adjust */
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px; /* space between game cards */
+    padding: 20px;
+  }
+  
+  .game-card {
+    background-color: #222;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  
+  .game-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .game-card img {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .game-card p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #fff;
+  }
+  

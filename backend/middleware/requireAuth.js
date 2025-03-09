@@ -20,6 +20,8 @@ const requireAuth = async (req, res, next) => {
 
         // Use the user ID (_id) to find the user in the database.
         // Only select the _id field for performance reasons.
+
+        // Add the user property to the request object before running controller functions.
         req.user = await User.findOne({ _id }).select('_id');
         next();
 
