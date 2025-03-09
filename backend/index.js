@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+
 import { connectDB } from './config/db.js';
 
 import userRoutes from './routes/userRoute.js';
@@ -8,8 +9,10 @@ import reviewRoutes from './routes/reviewRoute.js';
 import friendsRoutes from './routes/friendsRoute.js';
 
 
-dotenv.config();
 
+dotenv.config();
+console.log("Mongo URI:", process.env.MONGO_URI);
+console.log("Port:", process.env.PORT);
 const app = express();
 
 // Middleware function that runs before you send response back to client

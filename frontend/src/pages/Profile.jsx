@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext.js';
+import UserReviews from '../components/UserReviews.jsx';
+
 
 const Profile = () => {
     const [games, setGames] = useState([]);
     const [reviews, setReviews] = useState([]);
+    const { user } = useAuthContext();
+
+
 
     useEffect(() => {
         const fetchGames = async () => {
@@ -16,10 +22,12 @@ const Profile = () => {
 
         fetchGames();
     }, []);
-    
+
+
+
     useEffect(() => {
         const fetchReviews = async () => {
-            const response = await fetch('/api/reviews');
+            const response = await fetch(`/api/reviews?userid=${user.token}`);
             const data = await response.json();
             
             if (response.ok) {
@@ -28,7 +36,11 @@ const Profile = () => {
         }
 
         fetchReviews();
-    }, []);
+    }, [user]);
+
+    if (!user) {
+        return <p>Loading user data...</p>;
+    }
 
     return (
         <>
@@ -44,13 +56,9 @@ const Profile = () => {
                 ))}
             </div>
 
-            <div className="reviews">
-                {reviews.map((review) => (
-                    <div key={review._id}>
-                        <h2>{review.rating}</h2>
-                        <p>{review.text}</p>
-                    </div>
-                ))}
+             {/* Display the user's reviews using the UserReviews component */}
+             <div className="reviews">
+                <UserReviews userid={user.token} username={user.username} reviews={reviews} setReviews={setReviews}/>
             </div>
         </>
     )
