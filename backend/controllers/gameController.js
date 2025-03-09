@@ -10,7 +10,6 @@ export const getGames = async (req, res) => {
     }
 };
 
-
 export const getGameById = async (req, res) => {
   const { id } = req.params;
   try {

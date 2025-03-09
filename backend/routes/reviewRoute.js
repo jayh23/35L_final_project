@@ -1,9 +1,12 @@
 import express from 'express';
 
-// Controller functions.
+import requireAuth from '../middleware/requireAuth.js';
 import { getReviews, createReview, updateReview, deleteReview } from '../controllers/reviewController.js';
 
 const router = express.Router();
+
+// Protect all review routes with authentication middleware.
+router.use(requireAuth);
 
 // GET all reviews.
 router.get('/', getReviews);

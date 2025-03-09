@@ -2,7 +2,23 @@ import mongoose from 'mongoose';
 
 import List from '../models/listModel.js';
 
-// Get one game list.
+// Get all game lists for a specific user.
+export const getLists = async (req, res) => {
+
+    try {
+        // Find the current user id.
+        const userId = req.user._id;
+
+        // Find lists associated with the current user.
+        const lists = await List.find({ userId: userId });
+
+        res.status(200).json({ data: lists });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// Get one game list for a specific user.
 export const getList = async (req, res) => {
     const { id } = req.params;
 
@@ -31,7 +47,7 @@ export const createList = async (req, res) => {
         // Find the current user id.
         const userId = req.user._id;
 
-        const newList = await List.create({ ...req.body, userId: userId });
+        const newList = await List.create({ userId: userId, ...req.body });
 
         res.status(200).json({ data: newList });
     } catch (error) {
@@ -40,10 +56,10 @@ export const createList = async (req, res) => {
     }
 };
 
-// Update a list.
-export const updateList = async (req, res) => {
+// Add a game to a list.
+export const addGameToList = async (req, res) => {
     const { id } = req.params;
-    const { game } = req.body;
+    const { games } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: "Invalid list id." });
@@ -52,7 +68,30 @@ export const updateList = async (req, res) => {
     try {
         const updatedList = await List.findByIdAndUpdate(
             { _id: id }, 
-            { $addToSet: { games: game }},
+            { $addToSet: { games: { $each: games } }},
+            { new: true }
+        );
+
+        res.status(200).json({ data: updatedList });
+    } catch (error) {
+        console.error("Error in updating list:", error.message);
+        res.status(500).json({ error: "Server Error" });
+    }
+};
+
+// Remove a game from a list.
+export const removeGameFromList = async (req, res) => {
+    const { id } = req.params;
+    const { games } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "Invalid list id." });
+    }
+
+    try {
+        const updatedList = await List.findByIdAndUpdate(
+            { _id: id }, 
+            { $pull: { games: { $in: games } }},
             { new: true }
         );
 

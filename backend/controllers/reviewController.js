@@ -15,15 +15,17 @@ export const getReviews = async (req, res) => {
 
 // Create a new review.
 export const createReview = async (req, res) => {
-    const review = req.body; // user will send this data
 
-    if (!review.rating) {
+    if (!req.body.rating) {
         return res.status(400).json({ message: "Please provide a rating." });
     }
 
     // Add review to database.
     try {
-        const newReview = await Review.create(review);
+        // Find the current user id.
+        const userId = req.user._id;
+
+        const newReview = await Review.create({ userId: userId, ...req.body });
 
         res.status(200).json({ data: newReview });
     } catch (error) {
@@ -36,14 +38,12 @@ export const createReview = async (req, res) => {
 export const updateReview = async (req, res) => {
     const { id } = req.params;
 
-    const review = req.body;
-
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: "Invalid review id." });
     }
 
     try {
-        const updatedReview = await Review.findByIdAndUpdate({ _id: id }, review);
+        const updatedReview = await Review.findByIdAndUpdate({ _id: id }, req.body);
 
         res.status(200).json({ data: updatedReview });
     } catch (error) {

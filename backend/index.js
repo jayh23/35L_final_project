@@ -6,7 +6,7 @@ import userRoutes from './routes/userRoute.js';
 import gameRoutes from './routes/gameRoute.js';
 import reviewRoutes from './routes/reviewRoute.js';
 import friendsRoutes from './routes/friendsRoute.js';
-import listRoutes from './routes/friendsRoute.js';
+import listRoutes from './routes/listRoute.js';
 
 dotenv.config();
 
