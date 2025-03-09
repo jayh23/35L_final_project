@@ -3,6 +3,11 @@ import { useAuthContext } from '../hooks/useAuthContext';
 export const useReviewService = () => {
     const { user } = useAuthContext();
 
+    if (!user) {
+        console.error("User is not authenticated.");
+        return null;
+    }
+
     const getAllReviews = async () => {
         try {
             const response = await fetch('/api/reviews/all', {
@@ -129,3 +134,5 @@ export const useReviewService = () => {
 //          useEffect(() => {
 //              deleteReview("id").then(setReviews);
 //          }, []);
+
+//      You can actually put all necessary functions in a single useEffect hook to run them.

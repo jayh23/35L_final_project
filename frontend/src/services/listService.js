@@ -3,6 +3,11 @@ import { useAuthContext } from '../hooks/useAuthContext';
 export const useListService = () => {
     const { user } = useAuthContext();
 
+    if (!user) {
+        console.error("User is not authenticated.");
+        return [];
+    }
+
     const getLists = async () => {
         try {
             const response = await fetch('/api/lists', {
@@ -83,8 +88,10 @@ export const useListService = () => {
     const deleteList = async (id) => {
         try {
             const response = await fetch(`/api/lists/${id}`, {
-                'Authorization': `Bearer ${user.token}`,
                 method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`,
+                },
             });
             const data = await response.json();
 
@@ -134,3 +141,5 @@ export const useListService = () => {
 //          useEffect(() => {
 //              deleteList("id").then(setLists);
 //          }, []);
+
+//      You can actually put all necessary functions in a single useEffect hook to run them.
