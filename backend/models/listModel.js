@@ -12,7 +12,8 @@ const listSchema = new mongoose.Schema({
     },
     category: {
         type: String, // 0 owned, 1 favorites, 2 custom
-        required: true
+        required: true,
+        unique: true
     }
  });
 

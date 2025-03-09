@@ -107,19 +107,19 @@ export const useReviewService = () => {
 //      Fetch all reviews:
 //          useEffect(() => {
 //              getReviews().then(setReviews);
-//          });
+//          }, []);
 
 //      Create a new review:
 //          useEffect(() => {
 //              createReview({ rating: 5, comment: "Great game!" }).then(setReviews);
-//          });
+//          }, []);
 
 //      Update an existing review (replace "id" with the actual review ID):
 //          useEffect(() => {
 //              updateReview("id", { rating: 4, comment: "Good game!" }).then(setReviews);
-//          });
+//          }, []);
 
 //      Delete a review (replace "id" with the actual review ID):
 //          useEffect(() => {
 //              deleteReview("id").then(setReviews);
-//          });
+//          }, []);
