@@ -6,7 +6,7 @@ import { useUserService } from '../services/userService';
 
 import { useAuthContext } from '../hooks/useAuthContext';
 
-// import UserReviews from '../components/UserReviews.jsx';
+import UserReviews from '../components/UserReviews.jsx';
 
 const Profile = () => {
     const { user } = useAuthContext();
@@ -61,7 +61,8 @@ const Profile = () => {
 
             {/* Display the user's reviews using the UserReviews component 
                 <div className="reviews">
-                <UserReviews userid={user.token} username={user.username} reviews={reviews} setReviews={setReviews}/>*/}         
+                <UserReviews userid={user.token} username={user.username} reviews={reviews} setReviews={setReviews}/>*/}   
+            <UserReviews userid={user._id} username={user.username} reviews={reviews} setReviews={setReviews}/>
 
             <h1>Lists</h1>
             <div className="lists">
