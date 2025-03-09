@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext'
 import { useLogout } from '../hooks/useLogout'
 import "../styles/Navbar.css";
+import SearchBar from "./Searchbar";
+
 
 const Navbar = () => {
     const { logout } = useLogout();
@@ -23,7 +25,8 @@ const Navbar = () => {
                 <h1>GameBoxd</h1>
                 <div className="nav-links">
                   <Link to="/home">Home</Link>
-                  <a href="/search">Search</a>
+                  {/* <a href="/search">Search</a> */}
+                  <SearchBar />
                   <Link to="/friends">Friends</Link>
                   <Link to="/profile">{user.username}</Link>
                   <button onClick={handleClick}>Log out</button>
@@ -38,7 +41,8 @@ const Navbar = () => {
                 <h1>GameBoxd</h1>
                 <div className="nav-links">
                   <Link to="/home">Home</Link>
-                  <a href="/search">Search</a>
+                  {/* <a href="/search">Search</a> */}
+                  <SearchBar />
                   <Link to="/login">Login</Link>
                   <Link to="/signup">Signup</Link>
                 </div>

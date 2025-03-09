@@ -21,7 +21,7 @@ const ReviewForm = ({ gameid, gametitle, gameimage, setReviews }) => {
     
     const review = {
       gameid,
-      userid: user._id, // Use user.token as userid
+      userid: user.userId, // Use user.token as userid
       username: user.username, // Include the logged-in user's username
       gamename: gametitle, // Include the game title
       gameimage: gameimage, // Include the game image
