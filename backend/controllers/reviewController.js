@@ -13,6 +13,22 @@ export const getReviews = async (req, res) => {
     }
 };
 
+// Get all reviews for a specific user.
+export const getOneUserReviews = async (req, res) => {
+
+    try {
+        // Find the current user id.
+        const userId = req.user._id;
+
+        // Find reviews associated with the current user.
+        const reviews = await Review.find({ userId: userId });
+
+        res.status(200).json({ data: reviews });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 // Create a new review.
 export const createReview = async (req, res) => {
 

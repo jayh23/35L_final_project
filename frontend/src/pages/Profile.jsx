@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useAuthContext } from '../hooks/useAuthContext';
 
+import { useAuthContext } from '../hooks/useAuthContext';
+import { useReviewService } from '../services/reviewService';
 
 const Profile = () => {
-    const [games, setGames] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [friends, setFriends] = useState([]);
     const [lists, setLists] = useState([]);
 
     const { user } = useAuthContext();
+    const { getAllReviews, getOneUserReviews, createReview, updateReview, deleteReview } = useReviewService();
 
         // Fetch friends list
         useEffect(() => {
@@ -30,19 +31,7 @@ const Profile = () => {
             fetchFriends();
         }, [user]);
 
-    useEffect(() => {
-        const fetchGames = async () => {
-            const response = await fetch('/api/games');
-            const data = await response.json();
-            
-            if (response.ok) {
-                setGames(data.data);
-            }
-        }
-
-        fetchGames();
-    }, []);
-    
+/*    
     useEffect(() => {
         const fetchReviews = async () => {
             const response = await fetch('/api/reviews');
@@ -54,7 +43,11 @@ const Profile = () => {
         }
 
         fetchReviews();
-    }, []);
+    }, []); 
+*/
+    useEffect(() => {
+        getOneUserReviews().then(setReviews);
+    });
 
     useEffect(() => {
         const fetchLists = async () => {
@@ -81,16 +74,6 @@ const Profile = () => {
 
             <h1>Profile</h1>
             <p>Welcome to the Profile page.</p>
-
-            <h1>Games</h1>
-            <div className="games">
-                {games.map((game) => (
-                    <div key={game._id}>
-                        <h2>{game.title}</h2>
-                        <p>{game.year}</p>
-                    </div>
-                ))}
-            </div>
 
             <h1>Friends</h1>
             <div className="friends">

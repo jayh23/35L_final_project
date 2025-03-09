@@ -1,7 +1,7 @@
 import express from 'express';
 
 import requireAuth from '../middleware/requireAuth.js';
-import { getReviews, createReview, updateReview, deleteReview } from '../controllers/reviewController.js';
+import { getReviews, getOneUserReviews, createReview, updateReview, deleteReview } from '../controllers/reviewController.js';
 
 const router = express.Router();
 
@@ -9,7 +9,10 @@ const router = express.Router();
 router.use(requireAuth);
 
 // GET all reviews.
-router.get('/', getReviews);
+router.get('/all', getReviews);
+
+// GET all reviews for a specific user.
+router.get('/user', getOneUserReviews);
 
 // POST a new review.
 router.post('/', createReview);
