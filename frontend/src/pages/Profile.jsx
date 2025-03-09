@@ -9,6 +9,8 @@ const Profile = () => {
     const { user } = useAuthContext();
 
 
+    console.log('User from profile:', user);
+
 
     useEffect(() => {
         const fetchGames = async () => {
@@ -26,16 +28,19 @@ const Profile = () => {
 
 
     useEffect(() => {
+        if(user){
         const fetchReviews = async () => {
+            
             const response = await fetch(`/api/reviews?userid=${user.token}`);
             const data = await response.json();
             
             if (response.ok) {
                 setReviews(data.data);
             }
-        }
+        };
 
         fetchReviews();
+        }
     }, [user]);
 
     if (!user) {
@@ -58,7 +63,7 @@ const Profile = () => {
 
              {/* Display the user's reviews using the UserReviews component */}
              <div className="reviews">
-                <UserReviews userid={user.token} username={user.username} reviews={reviews} setReviews={setReviews}/>
+                <UserReviews userid={user.userId} username={user.username} reviews={reviews} setReviews={setReviews}/>
             </div>
         </>
     )
