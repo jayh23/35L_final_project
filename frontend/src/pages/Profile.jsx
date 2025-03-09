@@ -27,7 +27,7 @@ const Profile = () => {
 
     useEffect(() => {
         const fetchReviews = async () => {
-            const response = await fetch('/api/reviews?userid=${user.token}');
+            const response = await fetch(`/api/reviews?userid=${user.token}`);
             const data = await response.json();
             
             if (response.ok) {
@@ -58,7 +58,7 @@ const Profile = () => {
 
              {/* Display the user's reviews using the UserReviews component */}
              <div className="reviews">
-                <UserReviews userid={user.token} username={user.username} reviews={reviews}/>
+                <UserReviews userid={user.token} username={user.username} reviews={reviews} setReviews={setReviews}/>
             </div>
         </>
     )

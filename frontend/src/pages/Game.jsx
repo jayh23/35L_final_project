@@ -1,5 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ReviewForm from '../components/ReviewForm.jsx';
+import GameReviews from '../components/GameReviews.jsx';
 //import Dropdown from "react-bootstrap/Dropdown";
 // import Review from '...'; // Mahima
 
@@ -28,8 +30,18 @@ const addList = () => {
 const Game = () => {
   const { gameId } = useParams(); // retrieve the :gameId from the URL
   const [game, setGame] = useState(null);
+  const [reviews, setReviews] = useState([]); // State to store reviews
   const [error, setError] = useState(null);
 
+
+  const fetchReviews = async () => {
+    const response = await fetch(`/api/reviews?gameid=${gameId}`);
+    const data = await response.json();
+    
+    if (response.ok) {
+        setReviews(data.data);
+    }
+};
   useEffect(() => {
     const fetchGame = async () => {
       try {
@@ -46,6 +58,9 @@ const Game = () => {
         setError(err.message);
       }
     };
+
+
+    fetchReviews();
     fetchGame();
   }, [gameId]);
 
@@ -81,7 +96,8 @@ const Game = () => {
         <div className="scroll">
           <Tags tags={game.genre} />
           <p>{game.description}</p>
-          {/* <Review /> could go here in the future */}
+        <GameReviews gameid={gameId} gameTitle={game.title} reviews={reviews} />
+        <ReviewForm gameid={gameId} gametitle={game.title} gameimage={game.image} setReviews = {setReviews} />
         </div>
       </div>
     </div>
