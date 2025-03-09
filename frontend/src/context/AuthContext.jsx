@@ -24,15 +24,6 @@ export const AuthContextProvider = ({ children }) => {
         return { user: user ? JSON.parse(user) : null };
     });
 
-    // Keep user logged in if the page is refreshed.
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
-
-        if (user) {
-            dispatch({ type: 'LOGIN', payload: user });
-        }
-    }, []);
-
     console.log('AuthContext state:', state);
 
     // Makes the authentication state accessible to all child

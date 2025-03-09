@@ -3,7 +3,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 export const useListService = () => {
     const { user } = useAuthContext();
 
-    const getAllLists = async () => {
+    const getLists = async () => {
         try {
             const response = await fetch('/api/lists', {
                 headers: {
@@ -40,14 +40,15 @@ export const useListService = () => {
         }
     };
 
-    const updateList = async (id, list) => {
+    const addGameToList = async (id, games) => {
         try {
-            const response = await fetch(`/api/lists/${id}`, {
+            const response = await fetch(`/api/lists/add/${id}`, {
                 method: 'PATCH',
                 headers: {
+                    'Authorization': `Bearer ${user.token}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(list),
+                body: JSON.stringify(games),
             });
             const data = await response.json();
 
@@ -55,13 +56,34 @@ export const useListService = () => {
                 return data.data;
             }
         } catch (error) {
-            console.error("Error in updating list:", error.message);
+            console.error("Error in adding game to list:", error.message);
+        }
+    };
+
+    const removeGameFromList = async (id, games) => {
+        try {
+            const response = await fetch(`/api/lists/remove/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(games),
+            });
+            const data = await response.json();
+
+            if (response.ok) {
+                return data.data;
+            }
+        } catch (error) {
+            console.error("Error in removing game from list:", error.message);
         }
     };
 
     const deleteList = async (id) => {
         try {
             const response = await fetch(`/api/lists/${id}`, {
+                'Authorization': `Bearer ${user.token}`,
                 method: 'DELETE',
             });
             const data = await response.json();
@@ -74,5 +96,41 @@ export const useListService = () => {
         }
     };
 
-    return { getAllLists, createList, updateList, deleteList };
+    return { getLists, createList, addGameToList, removeGameFromList, deleteList };
 }
+
+// STEPS TO USE THESE API CALLS:
+
+// 1. Put this in the beginning of your file: 
+//      import { useListService } from '../services/listService';
+
+// 2. Initialize any needed functions:
+//      const { getLists, createList, addGameToList, removeGameFromList, deleteList } = useListService();
+
+// 3. Use the functions. Below is an example on how to use each function:
+//      [lists, setLists] = useState([]);
+
+//      Fetch all lists for a specific user:
+//          useEffect(() => {
+//              getLists().then(setLists);
+//          }, []);
+
+//      Create a new list:
+//          useEffect(() => {
+//              createList({ games: [], privacy: false, category: "category name" }).then(setLists);
+//          }, []);
+
+//      Add a game to an existing list (replace "id" with the actual list ID):
+//          useEffect(() => {
+//              addGameToList("id", { games: ["game_id"] }).then(setLists);
+//          }, []);
+
+//      Remove a game from an existing list (replace "id" with the actual list ID):
+//          useEffect(() => {
+//              addGameToList("id", { games: ["game_id"] }).then(setLists);
+//          }, []);
+
+//      Delete a list (replace "id" with the actual list ID):
+//          useEffect(() => {
+//              deleteList("id").then(setLists);
+//          }, []);

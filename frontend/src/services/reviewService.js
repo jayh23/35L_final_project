@@ -63,6 +63,7 @@ export const useReviewService = () => {
             const response = await fetch(`/api/reviews/${id}`, {
                 method: 'PATCH',
                 headers: {
+                    'Authorization': `Bearer ${user.token}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(review),
@@ -81,6 +82,9 @@ export const useReviewService = () => {
         try {
             const response = await fetch(`/api/reviews/${id}`, {
                 method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`,
+                },
             });
             const data = await response.json();
 
@@ -104,6 +108,8 @@ export const useReviewService = () => {
 //      const { getReviews, createReview, updateReview, deleteReview } = useReviewService();
 
 // 3. Use the functions. Below is an example on how to use each function:
+//      [reviews, setReviews] = useState([]);
+
 //      Fetch all reviews:
 //          useEffect(() => {
 //              getReviews().then(setReviews);
@@ -111,12 +117,12 @@ export const useReviewService = () => {
 
 //      Create a new review:
 //          useEffect(() => {
-//              createReview({ rating: 5, comment: "Great game!" }).then(setReviews);
+//              createReview({ gameId: "game_id", rating: 5, text: "Great game!", privacy: false, likes: 0 }).then(setReviews);
 //          }, []);
 
 //      Update an existing review (replace "id" with the actual review ID):
 //          useEffect(() => {
-//              updateReview("id", { rating: 4, comment: "Good game!" }).then(setReviews);
+//              updateReview("id", { rating: 4, text: "Good game!" }).then(setReviews);
 //          }, []);
 
 //      Delete a review (replace "id" with the actual review ID):
