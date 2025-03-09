@@ -15,12 +15,12 @@ const Profile = () => {
     const [reviews, setReviews] = useState([]);
     const [friends, setFriends] = useState([]);
 
-    const { getAllLists } = useListService();
+    const { getLists } = useListService();
     const { getOneUserReviews } = useReviewService();
     const { getFriends } = useUserService();
 
     useEffect(() => {
-        getAllLists().then(setLists);
+        getLists().then(setLists);
         getOneUserReviews().then(setReviews);
         getFriends().then(setFriends);
     }, []);
@@ -59,9 +59,9 @@ const Profile = () => {
                 ))}
              </div>
 
-             //{/* Display the user's reviews using the UserReviews component */}
-             //<div className="reviews">
-             //   <UserReviews userid={user.token} username={user.username} reviews={reviews} setReviews={setReviews}/>            
+            {/* Display the user's reviews using the UserReviews component 
+                <div className="reviews">
+                <UserReviews userid={user.token} username={user.username} reviews={reviews} setReviews={setReviews}/>*/}         
 
             <h1>Lists</h1>
             <div className="lists">
