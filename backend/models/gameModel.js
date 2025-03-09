@@ -33,6 +33,12 @@ const gameSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true
+    },
+    trending: { 
+        type: Boolean, default: false 
+    },
+    popular: { 
+        type: Boolean, default: false 
     }
 
  })

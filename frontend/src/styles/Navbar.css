@@ -1,39 +1,41 @@
-/* Navbar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #181818;
-    border-bottom: 2px solid #444;
-  }
-  
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-  }
-  
-  .nav-links a:hover {
-    color: #00aaff;
-  }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* space between items */
+}
 
-  .nav-links button {
-    /* Match spacing with the anchor tags */
-    margin-left: 20px;
-  
-    /* Make it stand out */
-    background-color: #ff4444;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-  
-    /* Let users know it’s clickable */
-    cursor: pointer;
-  }
-  
-  /* Hover state for the button */
-  .nav-links button:hover {
-    background-color: #ff2222;
-  }
+.nav-links form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links input[type="text"] {
+  border-radius: 4px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* Default button styles for all buttons in nav-links */
+.nav-links button {
+  border: none;
+  background-color: #ff4444; /* red */
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nav-links button:hover {
+  background-color: #ff2222; /* darker red on hover */
+}
+
+/* Override button styles for the search form specifically */
+.nav-links form button {
+  background-color: #4466ff; /* blue for search */
+}
+
+.nav-links form button:hover {
+  background-color: #2244ff; /* darker blue on hover */
+}
