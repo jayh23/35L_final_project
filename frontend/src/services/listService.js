@@ -115,6 +115,8 @@ export const useListService = () => {
 //      const { getLists, createList, addGameToList, removeGameFromList, deleteList } = useListService();
 
 // 3. Use the functions. Below is an example on how to use each function:
+//    Replace parameters with actual values (e.g. replace "id" with the actual list ID).
+
 //      [lists, setLists] = useState([]);
 
 //      Fetch all lists for a specific user:
@@ -127,17 +129,17 @@ export const useListService = () => {
 //              createList({ games: [], privacy: false, category: "category name" }).then(setLists);
 //          }, []);
 
-//      Add a game to an existing list (replace "id" with the actual list ID):
+//      Add a game to an existing list:
 //          useEffect(() => {
 //              addGameToList("id", { games: ["game_id"] }).then(setLists);
 //          }, []);
 
-//      Remove a game from an existing list (replace "id" with the actual list ID):
+//      Remove a game from an existing list:
 //          useEffect(() => {
-//              addGameToList("id", { games: ["game_id"] }).then(setLists);
+//              removeGameFromList("id", { games: ["game_id"] }).then(setLists);
 //          }, []);
 
-//      Delete a list (replace "id" with the actual list ID):
+//      Delete a list:
 //          useEffect(() => {
 //              deleteList("id").then(setLists);
 //          }, []);

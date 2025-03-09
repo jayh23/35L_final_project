@@ -113,6 +113,8 @@ export const useReviewService = () => {
 //      const { getReviews, createReview, updateReview, deleteReview } = useReviewService();
 
 // 3. Use the functions. Below is an example on how to use each function:
+//    Replace parameters with actual values (e.g. replace "id" with the actual review ID).
+
 //      [reviews, setReviews] = useState([]);
 
 //      Fetch all reviews:
@@ -125,12 +127,12 @@ export const useReviewService = () => {
 //              createReview({ gameId: "game_id", rating: 5, text: "Great game!", privacy: false, likes: 0 }).then(setReviews);
 //          }, []);
 
-//      Update an existing review (replace "id" with the actual review ID):
+//      Update an existing review:
 //          useEffect(() => {
 //              updateReview("id", { rating: 4, text: "Good game!" }).then(setReviews);
 //          }, []);
 
-//      Delete a review (replace "id" with the actual review ID):
+//      Delete a review:
 //          useEffect(() => {
 //              deleteReview("id").then(setReviews);
 //          }, []);
