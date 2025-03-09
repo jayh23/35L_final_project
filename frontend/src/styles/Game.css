@@ -1,0 +1,100 @@
+/* Game Page Container */
+.game-page {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    color: #fff;
+    background-color: #181818;
+    min-height: 80vh; /* Adjust as needed */
+  }
+  
+  /* Left Column: Cover, Release Date, Rating, Buttons */
+  .leftcol {
+    width: 250px;         /* Fixed width for left column */
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  /* Cover Image */
+  .game-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  
+  /* Buttons for library/favorite */
+  .library-btn,
+  .favorite-btn {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4479ff; /* or #444 for a subdued look */
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .library-btn:hover,
+  .favorite-btn:hover {
+    background-color: #4744ff;
+  }
+  
+  /* Right Column: Title, Tags, Description, etc. */
+  .rightcol {
+    flex: 1;              /* Take remaining space */
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    overflow: hidden;     /* Ensures content doesn't overflow outside container */
+  }
+  
+  .game-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  
+  /* Scrollable container for tags and description */
+  .scrollable-content {
+    max-height: 400px;    /* Adjust to taste */
+    overflow-y: auto;
+    padding-right: 10px;  /* Some padding for scrollbar spacing */
+  }
+  
+  /* Tag styling */
+  .tag-container {
+    margin-bottom: 10px;
+  }
+  
+  .tag-button {
+    margin: 5px 5px 0 0;
+    padding: 6px 10px;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .tag-button:hover {
+    background-color: #666;
+  }
+  
+  .game-description {
+    margin-top: 10px;
+    background-color: #1a1a1a;  /* Slightly different dark background */
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #eee;
+    /* If you have multi-line descriptions and want to keep spacing from the DB: */
+    /* white-space: pre-wrap; */
+  }
+  

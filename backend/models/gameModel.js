@@ -28,7 +28,13 @@ const gameSchema = new mongoose.Schema({
         type: Number,
         default: 0,
         required: true
+    },
+
+    description: {
+        type: String,
+        required: true
     }
+
  })
 
  const Game = mongoose.model('Game', gameSchema);
