@@ -20,7 +20,7 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/home" element={<Home />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
                 <Route path="/friends" element={user ? <Friends /> : <Navigate to="/login" />} />
                 <Route path="/login" element={!user ? <Login /> : <Navigate to="/home" />} />
                 <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/home" />} />

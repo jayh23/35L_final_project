@@ -1,44 +1,3 @@
-// import Game from '../models/gameModel.js';
-
-// // Get all games.
-// export const getGames = async (req, res) => {
-//     try {
-//         const games = await Game.find({});
-//         res.status(200).json({ data: games });
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// };
-
-// export const getGameById = async (req, res) => {
-//     const { id } = req.params;
-//     try {
-//       const game = await Game.findById(id);
-//       if (!game) {
-//         return res.status(404).json({ message: 'Game not found' });
-//       }
-//       res.status(200).json({ data: game });
-//     } catch (error) {
-//       res.status(500).json({ message: error.message });
-//     }
-//   };
-
-//   export const searchGames = async (req, res) => {
-//     const { q } = req.query; // 'q' stands for the query string
-//     try {
-//       // Perform a case-insensitive search on the "title" field
-//       const results = await Game.find({
-//         title: { $regex: q, $options: 'i' }
-//       });
-  
-//       res.status(200).json({ data: results });
-//     } catch (error) {
-//       console.error('Search error:', error);
-//       res.status(500).json({ message: error.message });
-//     }
-//   };
-
-
 import Game from '../models/gameModel.js';
 
 // Get all games, with optional filtering for trending or popular.
@@ -83,6 +42,7 @@ export const searchGames = async (req, res) => {
     const results = await Game.find({
       title: { $regex: q, $options: 'i' }
     });
+
 
     res.status(200).json({ data: results });
   } catch (error) {
