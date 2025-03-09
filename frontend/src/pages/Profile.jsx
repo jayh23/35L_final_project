@@ -22,7 +22,7 @@ const Profile = () => {
         getAllLists().then(setLists);
         getOneUserReviews().then(setReviews);
         getFriends().then(setFriends);
-    }, [user]);
+    }, []);
     
     return (
         <>
@@ -44,8 +44,8 @@ const Profile = () => {
             <div className="lists">
                 {lists.map((list) => (
                     <div key={list._id}>
-                        <h2>{list.games}</h2>
-                        <p>{list.category}</p>
+                        <h2>{list.category}</h2>
+                        <p>{list.games}</p>
                     </div>
                 ))}
             </div>

@@ -15,10 +15,13 @@ export const authReducer = (state, action) => {
 }
 
 export const AuthContextProvider = ({ children }) => {
+
+
     // Initializes the state of the user to null so that no user
     // is logged in by default.
-    const [state, dispatch] = useReducer(authReducer, {
-        user: null
+    const [state, dispatch] = useReducer(authReducer, null, () => {
+        const user = localStorage.getItem('user');
+        return { user: user ? JSON.parse(user) : null };
     });
 
     // Keep user logged in if the page is refreshed.
