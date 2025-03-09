@@ -1,5 +1,6 @@
 import express from 'express';
 
+
 // Controller functions.
 import { signupUser, loginUser, searchUsers} from '../controllers/userController.js';
 

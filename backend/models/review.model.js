@@ -1,23 +1,11 @@
 import mongoose from 'mongoose';
 
 const reviewSchema = new mongoose.Schema({
-    gameId: {
+    gameid: {
         type: String,
         required: true
     },
-    userId: {
-        type: String,
-        required: true
-    },
-    username: {
-        type: String,
-        required: true
-    },
-    gamename: {
-        type: String,
-        required: true
-    },
-    gameimage: {
+    userid: {
         type: String,
         required: true
     },

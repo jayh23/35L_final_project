@@ -6,6 +6,8 @@ import { useUserService } from '../services/userService';
 
 import { useAuthContext } from '../hooks/useAuthContext';
 
+// import UserReviews from '../components/UserReviews.jsx';
+
 const Profile = () => {
     const { user } = useAuthContext();
     
@@ -18,12 +20,29 @@ const Profile = () => {
     const { getFriends } = useUserService();
 
     useEffect(() => {
-        console.log(user);
         getAllLists().then(setLists);
         getOneUserReviews().then(setReviews);
         getFriends().then(setFriends);
     }, []);
-    
+
+  /*
+    useEffect(() => {
+        const fetchReviews = async () => {
+            const response = await fetch(`/api/reviews?userid=${user.token}`);
+            const data = await response.json();
+            
+            if (response.ok) {
+                setReviews(data.data);
+            }
+        }
+
+        fetchReviews();
+    }, [user]);
+
+    if (!user) {
+        return <p>Loading user data...</p>;
+    } */
+
     return (
         <>
 
@@ -38,7 +57,11 @@ const Profile = () => {
                         <p>{review.text}</p>
                     </div>
                 ))}
-            </div>
+             </div>
+
+             //{/* Display the user's reviews using the UserReviews component */}
+             //<div className="reviews">
+             //   <UserReviews userid={user.token} username={user.username} reviews={reviews} setReviews={setReviews}/>            
 
             <h1>Lists</h1>
             <div className="lists">
