@@ -36,11 +36,12 @@ export const getGameById = async (req, res) => {
 };
 
 export const searchGames = async (req, res) => {
-  const { q } = req.query; // 'q' stands for the query string
+    const { q } = req.query; // 'q' stands for the query string
+    const query = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   try {
     // Perform a case-insensitive search on the "title" field
     const results = await Game.find({
-      title: { $regex: q, $options: 'i' }
+      title: { $regex: query, $options: 'i' }
     });
 
 
