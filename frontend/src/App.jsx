@@ -19,11 +19,11 @@ function App() {
         <>
             <Navbar />
             <Routes>
-                <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
                 <Route path="/friends" element={user ? <Friends /> : <Navigate to="/login" />} />
-                <Route path="/login" element={!user ? <Login /> : <Navigate to="/home" />} />
-                <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/home" />} />
+                <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
+                <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
                 <Route path="/games/:gameId" element={<Game />} />
                 <Route path="/search" element={<SearchResults />} />
                 <Route path="/genre/:genreName" element={<GenrePage />} />

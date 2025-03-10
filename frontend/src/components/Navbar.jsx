@@ -24,7 +24,7 @@ const Navbar = () => {
                 <nav className="navbar">
                 <h1>GameBoxd</h1>
                 <div className="nav-links">
-                  <Link to="/home">Home</Link>
+                  <Link to="/">Home</Link>
                   {/* <a href="/search">Search</a> */}
                   <SearchBar />
                   <Link to="/friends">Friends</Link>
@@ -40,7 +40,7 @@ const Navbar = () => {
                 <nav className="navbar">
                 <h1>GameBoxd</h1>
                 <div className="nav-links">
-                  <Link to="/home">Home</Link>
+                  <Link to="/">Home</Link>
                   {/* <a href="/search">Search</a> */}
                   <SearchBar />
                   <Link to="/login">Login</Link>

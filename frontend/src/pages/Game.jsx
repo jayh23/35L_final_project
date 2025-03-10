@@ -8,8 +8,7 @@ import GameReviews from '../components/GameReviews.jsx';
 // import Review from '...'; // Mahima
 
 const Tags = ({ tags }) => {
-  const handleClick = (tag) => {
-    // Redirect to a genre page (to be implemented later)
+  const handleClick = (tag) => {    
     window.location.href = `/genre/${tag}`;
   };
 
@@ -66,10 +65,16 @@ const Game = () => {
       }
     };
 
-
     fetchReviews();
     fetchGame();
   }, [gameId]);
+
+  // Calculate average rating based on reviews for this game.
+  // Only include reviews where review.gameid matches the current gameId.
+  const gameReviews = reviews.filter(review => review.gameid === gameId);
+  const averageRating = gameReviews.length > 0 
+    ? gameReviews.reduce((sum, review) => sum + review.rating, 0) / gameReviews.length 
+    : null;
 
   const handleClick = (listType) => {
     // listType should be 0 (library) or 1 (favorites)
@@ -93,7 +98,8 @@ const Game = () => {
       <div className="leftcol">
         <img src={game.image} alt={game.title} className="game-cover" />
         <p>Release date: {game.year}</p>
-        <p>Rating: {Math.round(game.sumscore / game.numreviews)}</p>
+        {/* Display average rating calculated from reviews; fallback if no reviews exist */}
+        <p>Rating: {averageRating ? averageRating.toFixed(1) : "No ratings yet"}</p>
         
         {/* 
           Future Implementation:
@@ -110,11 +116,21 @@ const Game = () => {
       <div className="rightcol">
         <h1 className="game-title">{game.title}</h1>
         
-        <div className="scrollable-content">
+        {/* Static game details (tags & description) */}
+        <div className="game-details">
           <Tags tags={game.genre} />
-          <p>{game.description}</p>
-        <GameReviews gameid={gameId} gameTitle={game.title} reviews={reviews} />
-        <ReviewForm gameid={gameId} gametitle={game.title} gameimage={game.image} setReviews = {setReviews} />
+          <p className="game-description">{game.description}</p>
+        </div>
+
+        {/* Reviews container scrolls independently */}
+        <div className="reviews-container">
+          <GameReviews gameid={gameId} gameTitle={game.title} reviews={reviews} />
+          <ReviewForm 
+            gameid={gameId} 
+            gametitle={game.title} 
+            gameimage={game.image} 
+            setReviews={setReviews} 
+          />
         </div>
       </div>
     </div>
