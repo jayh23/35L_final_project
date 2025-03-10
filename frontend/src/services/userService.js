@@ -24,7 +24,7 @@ export const useUserService = () => {
 
     const getUserUsername = async (username) => {
         try {
-            const response = await fetch(`/api/user/profile/${username}`);
+            const response = await fetch(`/api/user/profile?username=${username}`);
             const data = await response.json();
 
             if (response.ok) {
@@ -38,7 +38,7 @@ export const useUserService = () => {
 
     const getUserId = async (id) => {
         try {
-            const response = await fetch(`/api/user/${id}`);
+            const response = await fetch(`/api/user/profile?id=${id}`);
             const data = await response.json();
 
             if (response.ok) {

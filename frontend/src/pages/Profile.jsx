@@ -44,7 +44,7 @@ const Profile = () => {
                 <span className="text-3xl font-bold">{userInfo.username}</span>
             </div>
 
-            <div className="profile-bio grid grid-flow sm:grid-flow-col gap-5 py-5 px-5 sm:px-15">
+            <div className="profile-bio grid grid-flow sm:grid-flow-col gap-5 py-5 px-5 sm:px-20">
 
                 <div className="profile-lists-container col-span-2">
                     <h1 className="text-2xl font-bold mb-3">Game Lists</h1>

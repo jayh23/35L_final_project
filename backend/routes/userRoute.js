@@ -6,8 +6,16 @@ import { signupUser, loginUser, searchUsers, getUserUsername, getUserId } from '
 
 const router = express.Router();
 
-router.get('/profile/:username', getUserUsername);
-router.get('/:id', getUserId);
+//router.get('/profile/:username', getUserUsername);
+//router.get('/profile/:id', getUserId);
+
+router.get('/profile', (req, res) => {
+    if (req.query.username) {
+        return getUserUsername(req, res);
+    } else if (req.query.id) {
+        return getUserId(req, res);
+    }
+});
 
 // (POST) Login route.
 router.post('/login', loginUser);

@@ -67,7 +67,7 @@ export const searchUsers = async (req, res) => {
   
 // Get user profile through username.
 export const getUserUsername = async (req, res) => {
-    const { username } = req.params;
+    const { username } = req.query;
 
     try {
         const user = await User.findOne({ username }).select('username email avatar banner friends friendRequests');
@@ -84,7 +84,7 @@ export const getUserUsername = async (req, res) => {
 
 // Get user profile through Id.
 export const getUserId = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.query;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: "Invalid user id." });
