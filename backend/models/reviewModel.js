@@ -11,15 +11,12 @@ const reviewSchema = new mongoose.Schema({
     },
     username: {
         type: String,
-        required: true
     },
     gamename: {
         type: String,
-        required: true
     },
     gameimage: {
         type: String,
-        required: true
     },
     rating: {
         type: Number,

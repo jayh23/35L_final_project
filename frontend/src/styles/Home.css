@@ -44,7 +44,7 @@ body, html {
 }
 
 /* Game List (makes sure games display properly) */
-.game-list {
+.home-container .game-list {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -53,7 +53,7 @@ body, html {
 }
 
 /* Game Cards */
-.game-card {
+.home-container .game-card {
   width: 180px;
   background-color: #222;
   padding: 10px;
@@ -65,22 +65,22 @@ body, html {
   color: #fff; 
 }
 
-.game-card:hover {
+.home-container .game-card:hover {
   transform: scale(1.05);
   color: #ccc;
 }
 
 
-.game-card:visited {
+.home-container .game-card:visited {
   color: #fff;
 }
 
-.game-card img {
+.home-container .game-card img {
   width: 100%;
   border-radius: 5px;
 }
 
-.game-card p {
+.home-container .game-card p {
   margin-top: 8px;
   font-size: 14px;
   color: inherit; 
@@ -113,7 +113,7 @@ display: none;        /* Hide the scrollbar in Chrome/Safari/Opera */
 }
 
 /* Game cards */
-.game-card {
+.home-container .game-card {
 min-width: 180px;       /* Enough width to see each card */
 background-color: #222;
 padding: 10px;
@@ -123,16 +123,16 @@ flex-shrink: 0;         /* Prevent the card from shrinking */
 transition: transform 0.2s;
 }
 
-.game-card:hover {
+.home-container .game-card:hover {
 transform: scale(1.05);
 }
 
-.game-card img {
+.home-container .game-card img {
 width: 100%;
 border-radius: 5px;
 }
 
-.game-card p {
+.home-container .game-card p {
 margin-top: 8px;
 font-size: 14px;
 }

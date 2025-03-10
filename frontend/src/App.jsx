@@ -11,16 +11,17 @@ import Signup from './pages/Signup'
 import SearchResults from './pages/SearchResults'
 import GenrePage from './pages/GenrePage';  // Import the new GenrePage
 
+import './styles/App.css'
 
 function App() {
     const { user } = useAuthContext()
 
     return (
         <>
-            <Navbar />
+            <Navbar className="navbar" />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
+                <Route path={`/profile/:username`} element={<Profile />} />
                 <Route path="/friends" element={user ? <Friends /> : <Navigate to="/login" />} />
                 <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
                 <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />

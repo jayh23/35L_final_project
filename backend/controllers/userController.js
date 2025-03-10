@@ -1,5 +1,6 @@
 import User from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 
 // Helper function to create a JWT token with a user ID and an expiration time of 3 days.
 const createToken = (_id) => {
@@ -64,3 +65,42 @@ export const searchUsers = async (req, res) => {
     }
   }
   
+// Get user profile through username.
+export const getUserUsername = async (req, res) => {
+    const { username } = req.params;
+
+    try {
+        const user = await User.findOne({ username }).select('username email avatar banner friends friendRequests');
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        
+        res.status(200).json({ data: user });
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
+}
+
+// Get user profile through Id.
+export const getUserId = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "Invalid user id." });
+    }
+
+    try {
+        const user = await User.findById(id).select('username email avatar banner friends friendRequests');
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        
+        res.status(200).json({ data: user });
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+        
+    }
+}
+

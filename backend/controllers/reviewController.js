@@ -1,18 +1,19 @@
 import mongoose from 'mongoose';
 
 import Review from '../models/reviewModel.js';
+import User from '../models/userModel.js';
 
 // Get all reviews, sorted by newest.
 
 // Get all reviews for a specific user.
 export const getOneUserReviews = async (req, res) => {
+    const { username } = req.params;
 
     try {
-        // Find the current user id.
-        const userId = req.user._id;
+        const user = await User.findOne({ username });
 
         // Find reviews associated with the current user.
-        const reviews = await Review.find({ userId: userId });
+        const reviews = await Review.find({ userId: user._id }).sort({ createdAt: -1 });
 
         res.status(200).json({ data: reviews });
     } catch (error) {

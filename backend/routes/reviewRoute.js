@@ -5,22 +5,19 @@ import { getReviews, getOneUserReviews, createReview, updateReview, deleteReview
 
 const router = express.Router();
 
-// Protect all review routes with authentication middleware.
-router.use(requireAuth);
-
 // GET all reviews.
 router.get('/', getReviews);
 
 // GET all reviews for a specific user.
-router.get('/user', getOneUserReviews);
+router.get('/:username', getOneUserReviews);
 
 // POST a new review.
-router.post('/', createReview);
+router.post('/', requireAuth, createReview);
 
 // PATCH (update) a review.
-router.patch('/:id', updateReview);
+router.patch('/:id', requireAuth, updateReview);
 
 // DELETE a review.
-router.delete('/:id', deleteReview);
+router.delete('/:id', requireAuth, deleteReview);
 
 export default router;

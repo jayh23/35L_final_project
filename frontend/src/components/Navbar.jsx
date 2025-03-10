@@ -17,8 +17,6 @@ const Navbar = () => {
     return (
         <>
             
-           
-
             {/* Allows user to logout if user is signed in. */}
             {user && (                
                 <nav className="navbar">
@@ -28,7 +26,7 @@ const Navbar = () => {
                   {/* <a href="/search">Search</a> */}
                   <SearchBar />
                   <Link to="/friends">Friends</Link>
-                  <Link to="/profile">{user.username}</Link>
+                  <Link to={`/profile/${user.username}`}>{user.username}</Link>
                   <button onClick={handleClick}>Log out</button>
                 </div>
                 </nav>
