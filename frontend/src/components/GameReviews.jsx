@@ -1,12 +1,12 @@
 import { useAuthContext } from "../hooks/useAuthContext.js";
 import "../styles/Review.css";
 
-const GameReviews = ({ gameid, gameTitle, reviews = [] }) => {
+const GameReviews = ({ gameId, gameTitle, reviews = [] }) => {
   const { user } = useAuthContext();
 
   // Filter reviews for the game and exclude private reviews
   const gameReviews = reviews.filter(
-    (review) => review.gameid === gameid && !review.privacy
+    (review) => review.gameId === gameId && !review.privacy
   );
 
     console.log('Reviews:', reviews);
