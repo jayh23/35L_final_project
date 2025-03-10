@@ -114,7 +114,7 @@ const Game = () => {
           <Tags tags={game.genre} />
           <p>{game.description}</p>
         <GameReviews gameid={gameId} gameTitle={game.title} reviews={reviews} />
-        <ReviewForm gameid={gameId} gametitle={game.title} gameimage={game.image} setReviews = {setReviews} />
+        <ReviewForm gameid={gameId} gametitle={game.title} gameimage={game.image} reviews={reviews} setReviews = {setReviews} />
         </div>
       </div>
     </div>

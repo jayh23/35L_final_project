@@ -1,9 +1,9 @@
 import  {useReviews}  from "../hooks/useReviews.js";
 import { useAuthContext } from "../hooks/useAuthContext.js"; // Import useAuthContext
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/Review.css";
 
-const ReviewForm = ({ gameid, gametitle, gameimage, setReviews }) => {
+const ReviewForm = ({ gameid, gametitle, gameimage, reviews, setReviews }) => {
   const { user } = useAuthContext(); // Get the logged-in user
   const [text, setText] = useState("");
   const [rating, setRating] = useState(5);
@@ -11,13 +11,27 @@ const ReviewForm = ({ gameid, gametitle, gameimage, setReviews }) => {
   const [isSubmitted, setIsSubmitted] = useState(false); 
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasReviewed, setHasReviewed] = useState(false);
 
-
+  useEffect(() => {
+    if (user && reviews) {
+      const userReview = reviews.find(
+        (review) => review.userid === user.userId && review.gameid === gameid
+      );
+      if (userReview) {
+        setHasReviewed(true); // User has already reviewed the game
+      }
+    }
+  }, [user, reviews, gameid]);
   
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent form from refreshing the page
-    
+
+    if (hasReviewed) {
+      setError("You have already submitted a review for this game.");
+      return;
+    }
     
     const review = {
       gameid,
