@@ -5,7 +5,7 @@ import ProfileGameList from '../components/profileComponents/ProfileGameList';
 import ProfileFriendCard from '../components/profileComponents/ProfileFriendCard';
 import ProfileReview from '../components/profileComponents/ProfileReview'
 
-//import { useReviewService } from '../services/reviewService';
+import { useReviewService } from '../services/reviewService';
 import { useListService } from '../services/listService';
 import { useUserService } from '../services/userService';
 
@@ -68,7 +68,7 @@ const Profile = () => {
                     <h1 className="text-2xl font-bold mb-3">Friends</h1>
                     <div className="friends">
                         {friends.map((friend) => (
-                            <ProfileFriendCard key={friend._id} friend={friend} /> 
+                            <ProfileFriendCard key={friend} friend={friend} /> 
                         ))}
                     </div>
                 </div>
