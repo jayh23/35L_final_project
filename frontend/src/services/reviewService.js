@@ -28,6 +28,7 @@ export const useReviewService = () => {
             return [];
         }
     };
+    /*
 
     const createReview = async (review) => {
         try {
@@ -86,8 +87,9 @@ export const useReviewService = () => {
             console.error("Error in deleting review:", error.message);
         }
     };
+    */
 
-    return { getAllReviews, getOneUserReviews, createReview, updateReview, deleteReview };
+    return { getAllReviews, getOneUserReviews};
 }
 
 // STEPS TO USE THESE API CALLS:

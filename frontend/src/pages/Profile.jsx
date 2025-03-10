@@ -5,7 +5,7 @@ import ProfileGameList from '../components/profileComponents/ProfileGameList';
 import ProfileFriendCard from '../components/profileComponents/ProfileFriendCard';
 import ProfileReview from '../components/profileComponents/ProfileReview'
 
-import { useReviewService } from '../services/reviewService';
+//import { useReviewService } from '../services/reviewService';
 import { useListService } from '../services/listService';
 import { useUserService } from '../services/userService';
 
@@ -36,8 +36,6 @@ const Profile = () => {
             setFriends(userInfo.friends);
         }
     }, [userInfo]);
-
-    console.log(friends)
 
     return (
         <div className='profile-container'>

@@ -6,7 +6,7 @@ import { getReviews, getOneUserReviews, createReview, updateReview, deleteReview
 const router = express.Router();
 
 // GET all reviews.
-router.get('/all', getReviews);
+router.get('/', getReviews);
 
 // GET all reviews for a specific user.
 router.get('/:username', getOneUserReviews);
