@@ -93,3 +93,28 @@ a:hover {
     margin: 0 auto;
     padding: 20px;
 }
+.lists-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    padding: 10px 0; /* Add some padding */
+    gap: 20px; /* Add space between cards */
+}
+/* Custom scrollbar styling */
+.lists-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.lists-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.lists-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.lists-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

@@ -1,41 +1,65 @@
-import React from 'react';
-import {Link} from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+import "../styles/listIndex.css";
 
 const ListCard = (props) => {
-    const {id, title, description, image} = props.list;
+    const { _id, category, games, privacy } = props.list;
+    const [showGames, setShowGames] = useState(false);
+    const [listGames, setListGames] = useState([]);
+{/*
+    const fetchGames = async () => {
+        try {
+            const response = await fetch(`/api/lists/${_id}/games`, {
+                headers: {
+                    'Authorization': `Bearer ${props.user.token}`,
+                },
+            });
+            const data = await response.json();
+            if (response.ok) {
+                setListGames(data.data);
+                setShowGames(!showGames); // Toggle visibility of games
+            }
+        } catch (error) {
+            console.error("Error fetching games:", error);
+        }
+    };
+    */}
 
-    const staticImage = "https://via.placeholder.com/350x200"; 
-
-    return(
-        <>
-            <div className="item">
-                {/* static image for now, draw from backend later* (latest added game*/}
-                <img 
-                    src={image || staticImage}  
-                    className="list-image" 
-                    style={{
-                        width: "100%",
-                        height: "200px",
-                        objectFit: "cover",
-                        borderRadius: "8px"
-                    }}
-                />
-                <div className="content">
-                    <Link to={'/list/$(id)'}>
-                        <div className="header" style={{ fontSize: "20px", fontWeight: "bold", marginTop: "10px" }}>
-                            {title}
-                        </div>
-                        <div style={{ fontSize: "14px", color: "#bbb" }}>{description}</div>
-                    </Link>
+    return (
+        <div className="item" style={{ marginLeft: '20px', minWidth: '200px' }}>
+            <div className="content">
+                <div
+                    onClick={fetchGames}
+                    style={{ cursor: 'pointer' }} 
+                >
+                    <div className="header" style={{ fontSize: "20px", fontWeight: "bold", marginTop: "10px" }}>
+                        {category} {/* Use category as the "title" */}
+                    </div>
+                    <div style={{ fontSize: "14px", color: "#bbb" }}>
+                        {games.length} games 
+                    </div>
+                    <div style={{ fontSize: "14px", color: "#bbb" }}>
+                        {privacy ? "Private" : "Public"} 
+                    </div>
                 </div>
-                <i
-                    className="fa-solid fa-trash"
-                    style={{ color: "gray", marginTop: "7px", cursor: "pointer" }}
-                    onClick = {() => props.clickHandler(id)}
-                ></i>
-            </div>
-        </>
 
+                {showGames && (
+                    <div className="games-list">
+                        {listGames.map((game) => (
+                            <div key={game._id} style={{ marginTop: '10px' }}>
+                                <img src={game.image} alt={game.title} style={{ width: '50px', height: '50px' }} />
+                                <p>{game.title}</p>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+            <i
+                className="fa-solid fa-trash"
+                style={{ color: "gray", marginTop: "7px", cursor: "pointer" }}
+                onClick={() => props.clickHandler(_id)}
+            ></i>
+        </div>
     );
 };
 
