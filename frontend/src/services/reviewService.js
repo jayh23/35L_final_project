@@ -3,18 +3,9 @@ import { useAuthContext } from '../hooks/useAuthContext';
 export const useReviewService = () => {
     const { user } = useAuthContext();
 
-    if (!user) {
-        console.error("User is not authenticated.");
-        return null;
-    }
-
     const getAllReviews = async () => {
         try {
-            const response = await fetch('/api/reviews/all', {
-                headers: {
-                    'Authorization': `Bearer ${user.token}`,
-                },
-            });
+            const response = await fetch('/api/reviews/all');
             const data = await response.json();
     
             if (response.ok) {
@@ -25,13 +16,9 @@ export const useReviewService = () => {
         }
     };
 
-    const getOneUserReviews = async () => {
+    const getOneUserReviews = async (username) => {
         try {
-            const response = await fetch('/api/reviews/user', {
-                headers: {
-                    'Authorization': `Bearer ${user.token}`,
-                },
-            });
+            const response = await fetch(`/api/reviews/${username}`);
             const data = await response.json();
     
             if (response.ok) {
@@ -40,7 +27,6 @@ export const useReviewService = () => {
         } catch (error) {
             return [];
         }
-
     };
 
     const createReview = async (review) => {

@@ -17,18 +17,16 @@ const Navbar = () => {
     return (
         <>
             
-           
-
             {/* Allows user to logout if user is signed in. */}
             {user && (                
                 <nav className="navbar">
                 <h1>GameBoxd</h1>
                 <div className="nav-links">
-                  <Link to="/home">Home</Link>
+                  <Link to="/">Home</Link>
                   {/* <a href="/search">Search</a> */}
                   <SearchBar />
                   <Link to="/friends">Friends</Link>
-                  <Link to="/profile">{user.username}</Link>
+                  <Link to={`/profile/${user.username}`}>{user.username}</Link>
                   <button onClick={handleClick}>Log out</button>
                 </div>
                 </nav>
@@ -40,7 +38,7 @@ const Navbar = () => {
                 <nav className="navbar">
                 <h1>GameBoxd</h1>
                 <div className="nav-links">
-                  <Link to="/home">Home</Link>
+                  <Link to="/">Home</Link>
                   {/* <a href="/search">Search</a> */}
                   <SearchBar />
                   <Link to="/login">Login</Link>

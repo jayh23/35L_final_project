@@ -1,96 +1,84 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import ProfileGameList from '../components/profileComponents/ProfileGameList';
+import ProfileFriendCard from '../components/profileComponents/ProfileFriendCard';
+import ProfileReview from '../components/profileComponents/ProfileReview'
 
 import { useReviewService } from '../services/reviewService';
 import { useListService } from '../services/listService';
 import { useUserService } from '../services/userService';
 
-import { useAuthContext } from '../hooks/useAuthContext';
-
-import UserReviews from '../components/UserReviews.jsx';
+import '../styles/Profile.css';
 
 const Profile = () => {
-    const { user } = useAuthContext();
+    const { username } = useParams();
+
+    const { getUserUsername } = useUserService();
+    const { getLists } = useListService();
+    const { getOneUserReviews } = useReviewService();
     
     const [lists, setLists] = useState([]);
     const [reviews, setReviews] = useState([]);
+    const [userInfo, setUserInfo] = useState({});
     const [friends, setFriends] = useState([]);
 
-    const { getLists } = useListService();
-    const { getOneUserReviews } = useReviewService();
-    const { getFriends } = useUserService();
-
     useEffect(() => {
-        getLists().then(setLists);
-        getOneUserReviews().then(setReviews);
-        getFriends().then(setFriends);
-    }, []);
+        getUserUsername(username).then(setUserInfo);
+        getLists(username).then(setLists);
+        getOneUserReviews(username).then(setReviews);   
+    }, [username]);
 
-  /*
+    
     useEffect(() => {
-        if(user){
-        const fetchReviews = async () => {
-            
-            const response = await fetch(`/api/reviews?userid=${user.token}`);
-            const data = await response.json();
-            
-            if (response.ok) {
-                setReviews(data.data);
-            }
-        };
-
-        fetchReviews();
+        // Set friends state once userInfo is available
+        if (userInfo.friends) {
+            setFriends(userInfo.friends);
         }
-    }, [user]);
+    }, [userInfo]);
 
-    if (!user) {
-        return <p>Loading user data...</p>;
-    } */
+    console.log(friends)
 
     return (
-        <>
-
-            <h1>Profile</h1>
-            <p>Welcome to the Profile page.</p>
-
-            <h1>Reviews</h1>
-            <div className="reviews">
-                {reviews.map((review) => (
-                    <div key={review._id}>
-                        <h2>{review.rating}</h2>
-                        <p>{review.text}</p>
-                    </div>
-                ))}
-             </div>
-
-            {/* Display the user's reviews using the UserReviews component 
-                <div className="reviews">
-                <UserReviews userid={user.token} username={user.username} reviews={reviews} setReviews={setReviews}/>*/}   
-            <UserReviews userid={user._id} username={user.username} reviews={reviews} setReviews={setReviews}/>
-
-            <h1>Lists</h1>
-            <div className="lists">
-                {lists.map((list) => (
-                    <div key={list._id}>
-                        <h2>{list.category}</h2>
-                        <p>{list.games}</p>
-                    </div>
-                ))}
+        <div className='profile-container'>
+            <div className="profile-card flex flex-row items-center gap-4 px-5 pt-25">
+                <img src={userInfo.avatar || 'https://placehold.co/500x500'} className="w-30 "></img>
+                <span className="text-3xl font-bold">{userInfo.username}</span>
             </div>
 
-            <h1>Friends</h1>
-            <div className="friends">
-                {friends.map((friend) => (
-                    <div key={friend._id}>
-                        <h2>{friend.username}</h2>
-                        <p>{friend.email}</p>
+            <div className="profile-bio grid grid-flow-col p-5 gap-5">
+
+                <div className="profile-lists-container col-span-1">
+                    <h1 className="text-2xl font-bold mb-3">Game Lists</h1>
+                    <div className="flex flex-col gap-3">
+                        {lists.map((list) => (
+                            <ProfileGameList key={list._id} list={list} />
+                        ))}
                     </div>
-                ))}
-             {/* Display the user's reviews using the UserReviews component */}
-             <div className="reviews">
-                <UserReviews userid={user.userId} username={user.username} reviews={reviews} setReviews={setReviews}/>
+                </div>
+                
+                <div className="reviews-container col-span-1">
+                    <h1 className="text-2xl font-bold mb-3">Reviews</h1>
+                    <div className="flex flex-col">
+                        {reviews.map((review) => (
+                            <ProfileReview key={review._id} review={review} />
+                        ))}
+                    </div>
+                </div>
+
+                <div className="profile-friends-container row-span-2">
+                    <h1 className="text-2xl font-bold mb-3">Friends</h1>
+                    <div className="friends">
+                        {friends.map((friend) => (
+                            <ProfileFriendCard key={friend._id} friend={friend} /> 
+                        ))}
+                    </div>
+                </div>
+
             </div>
-        </ >
+        </div>
     )
 }
 
 export default Profile;
+

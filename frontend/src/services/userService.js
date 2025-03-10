@@ -22,5 +22,33 @@ export const useUserService = () => {
         }
     };
 
-    return { getFriends };
+    const getUserUsername = async (username) => {
+        try {
+            const response = await fetch(`/api/user/profile/${username}`);
+            const data = await response.json();
+
+            if (response.ok) {
+                return data.data;
+            }
+
+        } catch (error) {
+            return [];
+        }
+    };
+
+    const getUserId = async (id) => {
+        try {
+            const response = await fetch(`/api/user/${id}`);
+            const data = await response.json();
+
+            if (response.ok) {
+                return data.data;
+            }
+
+        } catch (error) {
+            return [];
+        }
+    };
+
+    return { getFriends, getUserUsername, getUserId };
 }
