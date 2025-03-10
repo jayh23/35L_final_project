@@ -1,0 +1,75 @@
+/* Auth.css */
+
+/* Apply to both login and signup forms */
+.login,
+.signup {
+  max-width: 400px;
+  margin: 50px auto; /* centers the form on the page */
+  padding: 30px;
+  background-color: #222; /* dark background */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+/* Heading styling */
+.login h3,
+.signup h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Label styling */
+.login label,
+.signup label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+/* Input field styling */
+.login input[type="text"],
+.login input[type="name"],
+.login input[type="password"],
+.signup input[type="text"],
+.signup input[type="name"],
+.signup input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* Button styling */
+.login button,
+.signup button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4479ff; /* blue for action */
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Button hover state */
+.login button:hover,
+.signup button:hover {
+  background-color: #2244ff;
+}
+
+/* Error message styling */
+.login .error,
+.signup .error {
+  color: #ff4444;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+}

@@ -2,6 +2,9 @@ import { useState } from 'react';
 
 import { useSignup } from '../hooks/useSignup';
 
+import "../styles/Auth.css";
+
+
 const Signup = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

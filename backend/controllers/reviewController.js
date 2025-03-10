@@ -22,10 +22,10 @@ export const getOneUserReviews = async (req, res) => {
 };
 // Get all reviews, sorted by newest.
 export const getReviews = async (req, res) => {
-    const { gameid, userid } = req.query;
+    const { gameId, userId } = req.query;
     const query = {};
-    if (gameid) query.gameid = gameid;
-    if (userid) query.userid = userid;
+    if (gameId) query.gameId = gameId;
+    if (userId) query.userId = userId;
     
     try {
         const reviews = await Review.find({}).sort({ createdAt: -1 });
