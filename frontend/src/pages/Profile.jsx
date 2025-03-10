@@ -44,9 +44,9 @@ const Profile = () => {
                 <span className="text-3xl font-bold">{userInfo.username}</span>
             </div>
 
-            <div className="profile-bio grid grid-flow-col p-5 gap-5">
+            <div className="profile-bio grid grid-flow sm:grid-flow-col gap-5 py-5 px-5 sm:px-20">
 
-                <div className="profile-lists-container col-span-1">
+                <div className="profile-lists-container col-span-2">
                     <h1 className="text-2xl font-bold mb-3">Game Lists</h1>
                     <div className="flex flex-col gap-3">
                         {lists.map((list) => (
@@ -55,7 +55,7 @@ const Profile = () => {
                     </div>
                 </div>
                 
-                <div className="reviews-container col-span-1">
+                <div className="reviews-container col-span-2">
                     <h1 className="text-2xl font-bold mb-3">Reviews</h1>
                     <div className="flex flex-col">
                         {reviews.map((review) => (
@@ -64,7 +64,7 @@ const Profile = () => {
                     </div>
                 </div>
 
-                <div className="profile-friends-container row-span-2">
+                <div className="profile-friends-container col-span-2 sm:row-span-2">
                     <h1 className="text-2xl font-bold mb-3">Friends</h1>
                     <div className="friends">
                         {friends.map((friend) => (
