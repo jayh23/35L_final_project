@@ -1,11 +1,10 @@
 ﻿import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext.js";
-import "../styles/Game.css"; // <-- Import your dedicated Game page stylesheet
 import ReviewForm from '../components/ReviewForm.jsx';
 import GameReviews from '../components/GameReviews.jsx';
+import "../styles/Game.css";
 //import Dropdown from "react-bootstrap/Dropdown";
-// import Review from '...'; // Mahima
 
 const Tags = ({ tags }) => {
   const handleClick = (tag) => {    
@@ -24,12 +23,13 @@ const Tags = ({ tags }) => {
 };
 
 const Game = () => {
-  const { gameId } = useParams(); // retrieve the :gameId from the URL
+  const { gameId } = useParams();
   const [game, setGame] = useState(null);
-  const [reviews, setReviews] = useState([]); // State to store reviews
+  const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
   const { user } = useAuthContext();
 
+  // TODO: Move all of this to backend calculateScore()
   const fetchReviews = async () => {
     try {
       const response = await fetch('/api/reviews', {
@@ -58,7 +58,6 @@ const Game = () => {
           throw new Error(data.message || "Failed to fetch game");
         }
 
-        // Assuming your API returns { data: game }
         setGame(data.data || data);
       } catch (err) {
         setError(err.message);
@@ -69,8 +68,7 @@ const Game = () => {
     fetchGame();
   }, [gameId]);
 
-  // Calculate average rating based on reviews for this game.
-  // Only include reviews where review.gameid matches the current gameId.
+    // Calculate average rating based on reviews for this game.
   const gameReviews = reviews.filter(review => review.gameid === gameId);
   const averageRating = gameReviews.length > 0 
     ? gameReviews.reduce((sum, review) => sum + review.rating, 0) / gameReviews.length 

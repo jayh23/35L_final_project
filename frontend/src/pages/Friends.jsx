@@ -72,7 +72,7 @@ const Friends = () => {
         setError(null);
         
         try {
-            const response = await fetch(`/api/user/search?username=${searchQuery}`, {
+            const response = await fetch(`/api/user/search?username=${searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
@@ -138,6 +138,8 @@ const Friends = () => {
                 // Remove from requests and add to friends
                 setRequests(prev => prev.filter(r => r._id !== userId));
                 setFriends(prev => [...prev, data.user]);
+                console.log("Still not crashed");
+                console.log(friends);
             } else {
                 setError(data.error);
             }
@@ -149,6 +151,7 @@ const Friends = () => {
     // Decline friend request
     const declineRequest = async (userId) => {
         if (!user) return;
+        const data = await response.json();
         
         try {
             const response = await fetch(`/api/friends/decline`, {
@@ -164,7 +167,6 @@ const Friends = () => {
                 // Remove from requests
                 setRequests(prev => prev.filter(r => r._id !== userId));
             } else {
-                const data = await response.json();
                 setError(data.error);
             }
         } catch (err) {

@@ -24,7 +24,8 @@ function App() {
                 <Route path="/friends" element={user ? <Friends /> : <Navigate to="/login" />} />
                 <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
                 <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
-                <Route path="/games/:gameId" element={<Game />} />
+                <Route path="/games/:gameId" element={user ? <Game /> : <Navigate to="/" />} />
+                {/* Stopgap fix; game pages don't display when logged out*/}
                 <Route path="/search" element={<SearchResults />} />
                 <Route path="/genre/:genreName" element={<GenrePage />} />
 
