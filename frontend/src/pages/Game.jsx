@@ -1,5 +1,6 @@
 ﻿import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext.js";
 import "../styles/Game.css"; // <-- Import your dedicated Game page stylesheet
 import ReviewForm from '../components/ReviewForm.jsx';
 import GameReviews from '../components/GameReviews.jsx';
@@ -28,16 +29,26 @@ const Game = () => {
   const [game, setGame] = useState(null);
   const [reviews, setReviews] = useState([]); // State to store reviews
   const [error, setError] = useState(null);
-
+  const { user } = useAuthContext();
 
   const fetchReviews = async () => {
-    const response = await fetch(`/api/reviews?gameid=${gameId}`);
-    const data = await response.json();
-    
-    if (response.ok) {
+    try {
+      const response = await fetch('/api/reviews', {
+        headers: {
+          'Authorization': `Bearer ${user.token}`,
+        },
+      });
+      const data = await response.json();
+      console.log("All reviews from backend:", data); // Debugging
+
+      if (response.ok) {
         setReviews(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
     }
-};
+  };
+
   useEffect(() => {
     const fetchGame = async () => {
       try {
