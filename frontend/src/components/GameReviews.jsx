@@ -9,6 +9,7 @@ const GameReviews = ({ gameid, gameTitle, reviews = [] }) => {
     (review) => review.gameid === gameid && !review.privacy
   );
 
+    console.log('Reviews:', reviews);
   return (
     <div>
       <h1>Reviews for {gameTitle}</h1>

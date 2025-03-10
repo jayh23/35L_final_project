@@ -9,7 +9,7 @@ const router = express.Router();
 router.use(requireAuth);
 
 // GET all reviews.
-router.get('/all', getReviews);
+router.get('/', getReviews);
 
 // GET all reviews for a specific user.
 router.get('/user', getOneUserReviews);

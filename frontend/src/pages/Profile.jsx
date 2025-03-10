@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { useReviewService } from '../services/reviewService';
+//import { useReviewService } from '../services/reviewService';
 import { useListService } from '../services/listService';
 import { useUserService } from '../services/userService';
 
 import { useAuthContext } from '../hooks/useAuthContext';
 
-// import UserReviews from '../components/UserReviews.jsx';
+ import UserReviews from '../components/UserReviews.jsx';
 
 const Profile = () => {
     const { user } = useAuthContext();
@@ -16,51 +16,47 @@ const Profile = () => {
     const [friends, setFriends] = useState([]);
 
     const { getLists } = useListService();
-    const { getOneUserReviews } = useReviewService();
+    //const { getOneUserReviews } = useReviewService();
     const { getFriends } = useUserService();
 
+
+/*
     useEffect(() => {
         getLists().then(setLists);
-        getOneUserReviews().then(setReviews);
+      //  getOneUserReviews().then(setReviews);
         getFriends().then(setFriends);
     }, []);
-
-  /*
+*/
+  
     useEffect(() => {
-        if(user){
-        const fetchReviews = async () => {
-            
-            const response = await fetch(`/api/reviews?userid=${user.token}`);
-            const data = await response.json();
-            
-            if (response.ok) {
-                setReviews(data.data);
-            }
-        };
+        if (user) {
+            const fetchReviews = async () => {
+                const response = await fetch('/api/reviews', {
+                    headers: {
+                        'Authorization': `Bearer ${user.token}`,
+                    },
+                });
+                const data = await response.json();
+                console.log("All reviews from backend:", data); // Debugging
+                
+                if (response.ok) {
+                    setReviews(data.data);
+                }
+            };
 
-        fetchReviews();
+            fetchReviews();
         }
     }, [user]);
 
     if (!user) {
         return <p>Loading user data...</p>;
-    } */
+    } 
 
     return (
         <>
 
             <h1>Profile</h1>
             <p>Welcome to the Profile page.</p>
-
-            <h1>Reviews</h1>
-            <div className="reviews">
-                {reviews.map((review) => (
-                    <div key={review._id}>
-                        <h2>{review.rating}</h2>
-                        <p>{review.text}</p>
-                    </div>
-                ))}
-             </div>
 
             {/* Display the user's reviews using the UserReviews component 
                 <div className="reviews">
@@ -84,6 +80,7 @@ const Profile = () => {
                         <p>{friend.email}</p>
                     </div>
                 ))}
+            </div>
              {/* Display the user's reviews using the UserReviews component */}
              <div className="reviews">
                 <UserReviews userid={user.userId} username={user.username} reviews={reviews} setReviews={setReviews}/>
