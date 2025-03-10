@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import User from '../models/userModel';
+import User from '../models/userModel.js';
 
 const requireAuth = async (req, res, next) => {
     // Get the authorization header from the request.
@@ -20,6 +20,8 @@ const requireAuth = async (req, res, next) => {
 
         // Use the user ID (_id) to find the user in the database.
         // Only select the _id field for performance reasons.
+
+        // Add the user property to the request object before running controller functions.
         req.user = await User.findOne({ _id }).select('_id');
         next();
 

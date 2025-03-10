@@ -16,11 +16,7 @@ dist-ssr
 
 # Editor directories and files
 .vscode/*
-<<<<<<< Updated upstream
 .vs/
-=======
-.vs/*
->>>>>>> Stashed changes
 !.vscode/extensions.json
 .idea
 .DS_Store

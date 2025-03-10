@@ -1,0 +1,41 @@
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* space between items */
+}
+
+.nav-links form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links input[type="text"] {
+  border-radius: 4px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* Default button styles for all buttons in nav-links */
+.nav-links button {
+  border: none;
+  background-color: #ff4444; /* red */
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nav-links button:hover {
+  background-color: #ff2222; /* darker red on hover */
+}
+
+/* Override button styles for the search form specifically */
+.nav-links form button {
+  background-color: #4466ff; /* blue for search */
+}
+
+.nav-links form button:hover {
+  background-color: #2244ff; /* darker blue on hover */
+}
