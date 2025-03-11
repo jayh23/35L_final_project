@@ -128,10 +128,7 @@ const Game = () => {
 
           {user? (
           <ReviewForm 
-            gameId={gameId} 
-            gametitle={game.title} 
-            gameimage={game.image} 
-            setReviews={setReviews} 
+            gameId={gameId}  gametitle={game.title}  gameimage={game.image} reviews={reviews} setReviews={setReviews} 
           />
           ) : (
 
