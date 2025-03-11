@@ -12,7 +12,9 @@ import { useUserService } from '../services/userService';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 
-// import { updateUserAvatar } from '../services/userService'; // Add this to your existing service imports
+
+
+//import { updateUserAvatar } from '../services/userService'; // Add this to your existing service imports
 
 
 import '../styles/Profile.css';
@@ -24,6 +26,7 @@ const Profile = () => {
     const { getUserUsername } = useUserService();
     const { getLists, createList, deleteList } = useListService(); 
     const { getOneUserReviews } = useReviewService();
+    const { updateUserAvatar } = useUserService();
     
     const [lists, setLists] = useState([]);
     const [reviews, setReviews] = useState([]);
