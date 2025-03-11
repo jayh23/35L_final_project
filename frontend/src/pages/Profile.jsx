@@ -30,11 +30,22 @@ const Profile = () => {
     const { user: loggedInUser } = useAuthContext(); // Added
 
     // Add a new list
+    // const addListHandler = async (newList) => {
+    //     if (!user) return;
+    //     const createdList = await createList({ ...newList, userId: user._id }, user.token);
+    //     if (createdList) {
+    //         setLists([...lists, createdList]);
+    //     }
+    // };
+
     const addListHandler = async (newList) => {
         if (!user) return;
+        
         const createdList = await createList({ ...newList, userId: user._id }, user.token);
+        
         if (createdList) {
-            setLists([...lists, createdList]);
+            setLists([...lists, createdList]); // 
+            return createdList; //
         }
     };
 
@@ -51,6 +62,12 @@ const Profile = () => {
     const handleListClick = (list) => {
         setSelectedList(list);
     };
+    useEffect(() => {
+        getLists(user.token).then((data) => {
+            console.log("Fetched lists:", data); 
+            setLists(data || []);
+        });
+    }, [user]); 
 
     // Function to delete a review (only for own profile)
     const handleDeleteReview = async (reviewId) => { // Added
