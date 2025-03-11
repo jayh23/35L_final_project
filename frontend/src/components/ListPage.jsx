@@ -77,7 +77,7 @@ const ListPage = ({ lists = [], addListHandler, removeListHandler, onListClick }
                 style={{ marginBottom: '20px' }}
                 className="ui button"
             >
-                {showAddForm ? "Cancel" : "Add List"}
+                {showAddForm ? "Cancel" : "Add Game List"}
             </button>
 
             {/* Add List Form */}

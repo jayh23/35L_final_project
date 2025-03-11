@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useGameService } from '../../services/gameService';
+import { useReviewService } from '../../services/reviewService';
 
 import '../../styles/Profile.css';
 
