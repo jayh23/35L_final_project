@@ -35,7 +35,7 @@ const ImageUpload = () => {
             formData.append("file", uploadedFile); // Might be wrong, poorly adapted this from tutorial using different hosting/uploading service
 
             const response = await fetch("/api/upload-avatar", {
-                method: "POST",
+                method: "PATCH",
                 body: formData,
                 // Probably needs auth?
             });

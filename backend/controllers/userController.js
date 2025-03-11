@@ -65,8 +65,6 @@ export const searchUsers = async (req, res) => {
   }
 
 export const updateAvatar = async (req, res) => {
-
-
     if (file.size > 5 * 1024 * 1024) {
         return res.status(413).json({ error: "File too large, must be 5MB or less." });
         // Same as frontend but prevents bad actors from bypassing frontend
@@ -77,13 +75,10 @@ export const updateAvatar = async (req, res) => {
             return res.status(400).json({ error: "No file uploaded" });
         }
 
+        const userId = req.user._id;
         const avatarURL = `../../frontend/public/uploads/avatars/${req.file.filename}`;
 
-        const updatedUser = await User.findByIdAndUpdate(
-            userId,
-            { avatar: avatarURL },
-            { new: true }
-        );
+        const updatedUser = await User.findByIdAndUpdate(userId, { avatar: avatarURL }, { new: true });
 
         if (!updatedUser) {
             return res.status(404).json({ error: "User not found" });

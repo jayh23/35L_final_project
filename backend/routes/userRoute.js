@@ -16,6 +16,6 @@ router.post('/signup', signupUser);
 router.get('/search', searchUsers);
 
 // (PATCH) File upload route
-router.patch('/update-avatar', updateAvatar);
+router.patch("/upload-avatar", upload.single("file"), userController.uploadAvatar);
 
 export default router;
