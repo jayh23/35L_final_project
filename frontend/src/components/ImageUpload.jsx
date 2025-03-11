@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
-import DefaultImage from "../../public/images/"; // Change to default icon
-import EditIcon from "../../public/images"; //Change to edit icon
-import UploadingAnim from "../../public/images"; // Change to loading animation
+import DefaultImage from "../../public/images/doom.jpg"; // Change to default icon
+import EditIcon from "../../public/images/botw.jpg"; //Change to edit icon
+import UploadingAnim from "../../public/images/halo2.jpg"; // Change to loading animation
 
 const ImageUpload = () => {
     const [avatarURL, setAvatarURL] = useState(DefaultImage);
@@ -55,12 +55,12 @@ const ImageUpload = () => {
     // Inline styling from tutorial but it can be taken out
     return (
         <div className="relative h-96 w-96">
-            <image src={avatarURL} alt="Avatar" className="h-96 w-96 rounded-full" />
+            <img src={avatarURL} alt="Avatar" className="h-96 w-96 rounded-full" />
             <form id="form" encType='multipart/form-data'>
                 <button type='submit' onClick={handleImageUpload} className='flex-center absolute bottom-12 right-14 h-9 w-9'>
-                    <image src={EditIcon} alt="Edit" className='object-cover' />
+                    <img src={EditIcon} alt="Edit" className='object-cover' />
                 </button>
-                <input type="file" id="file" ref={fileUploadRef} accept="image/*" hidden>Choose file</input>
+                <input type="file" id="file" ref={fileUploadRef} accept="image/*" hidden />
             </form>
         </div>
     );

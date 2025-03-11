@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import SearchResults from './pages/SearchResults'
 import GenrePage from './pages/GenrePage';  // Import the new GenrePage
+import ImageUpload from './components/ImageUpload'
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
                 {/* Stopgap fix; game pages don't display when logged out*/}
                 <Route path="/search" element={<SearchResults />} />
                 <Route path="/genre/:genreName" element={<GenrePage />} />
-
+                <Route path="/test" element={<ImageUpload />} />
             </Routes>
 
         </>
