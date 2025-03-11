@@ -35,7 +35,7 @@ const Profile = () => {
         if (userInfo.friends) {
             setFriends(userInfo.friends);
         }
-    }, [userInfo]);
+    }, [userInfo.friends]);
 
     return (
         <div className='profile-container'>
@@ -44,7 +44,7 @@ const Profile = () => {
                 <span className="text-3xl font-bold">{userInfo.username}</span>
             </div>
 
-            <div className="profile-bio grid grid-flow sm:grid-flow-col gap-5 py-5 px-5 sm:px-20">
+            <div className="profile-bio grid grid-cols-3 sm:grid-flow-col gap-5 py-5 px-5 sm:px-20">
 
                 <div className="profile-lists-container col-span-2">
                     <h1 className="text-2xl font-bold mb-3">Game Lists</h1>
@@ -64,7 +64,7 @@ const Profile = () => {
                     </div>
                 </div>
 
-                <div className="profile-friends-container col-span-2 sm:row-span-2">
+                <div className="profile-friends-container overflow-y-autocol-span-2 col-span-2 sm:row-span-2">
                     <h1 className="text-2xl font-bold mb-3">Friends</h1>
                     <div className="friends">
                         {friends.map((friend) => (

@@ -15,3 +15,7 @@
 .profile-review:hover {
     background-color: rgb(53, 53, 53);
 }
+
+.reviews-container {
+    padding: 0px;
+}
