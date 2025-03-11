@@ -17,13 +17,6 @@ const GameReviews = ({ gameId, gameTitle, reviews = [] }) => {
         gameReviews.map((review) => (
           <div key={review._id} className="review-display">
             <h3 className="review-info">{review.username}</h3>
-            <img
-              src={review.gameimage}
-              width="100px"
-              height="150px"
-              align="right"
-              alt={review.gamename}
-            />
             <h4 className="review-info">
               {review.gamename}: {review.rating}⭐
             </h4>
