@@ -12,14 +12,16 @@ const GameReviews = ({ gameId, gameTitle, reviews = [] }) => {
     console.log('Reviews:', reviews);
   return (
     <div>
-      <h1>Reviews for {gameTitle}</h1>
+      <h1 className="review-subheading">Reviews for {gameTitle}</h1>
       {gameReviews.length > 0 ? (
         gameReviews.map((review) => (
           <div key={review._id} className="review-display">
-            <h3 className="review-info">{review.username}</h3>
-            <h4 className="review-info">
-              {review.gamename}: {review.rating}⭐
+           <div className="review-title"> 
+            <h3 className="user-name">{review.username}</h3>
+            <h4 className="game-name">
+              {review.gamename}: {review.rating}⭐  
             </h4>
+          </div>
             <p className="review-text">{review.text}</p>
           </div>
         ))
