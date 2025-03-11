@@ -50,5 +50,22 @@ export const useUserService = () => {
         }
     };
 
-    return { getFriends, getUserUsername, getUserId };
+    const updateUserAvatar = async (formData, token) => {
+        const response = await fetch('/api/user/avatar', {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          body: formData
+        });
+      
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.message || 'Avatar update failed');
+        }
+      
+        return response.json();
+      };
+
+    return { getFriends, getUserUsername, getUserId, updateUserAvatar };
 }

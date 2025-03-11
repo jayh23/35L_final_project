@@ -104,3 +104,24 @@ export const getUserId = async (req, res) => {
     }
 }
 
+
+export const updateAvatar = async (req, res) => {
+    if (!req.file) {
+      throw new BadRequestError('No file uploaded');
+    }
+  
+    const avatarPath = '/avatars/' + req.file.filename;
+    
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      { avatar: avatarPath },
+      { new: true, runValidators: true }
+    );
+  
+    if (!user) {
+      throw new NotFoundError('User not found');
+    }
+  
+    res.json({ avatar: user.avatar });
+  };
+

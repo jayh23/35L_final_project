@@ -10,6 +10,8 @@ import { useReviewService } from '../services/reviewService';
 import { useListService } from '../services/listService';
 import { useUserService } from '../services/userService';
 import { useAuthContext } from '../hooks/useAuthContext';
+// import { updateUserAvatar } from '../services/userService'; // Add this to your existing service imports
+
 
 import '../styles/Profile.css';
 
@@ -18,6 +20,7 @@ const Profile = () => {
     const { user } = useAuthContext();
 
     const { getUserUsername } = useUserService();
+    const { updateUserAvatar } = useUserService();
     const { getLists } = useListService();
     const { getOneUserReviews } = useReviewService();
     
@@ -89,6 +92,28 @@ const Profile = () => {
       }
     };
 
+    const handleAvatarUpload = async (file) => {
+        if (!file || !user) return;
+        
+        try {
+          const formData = new FormData();
+          formData.append('avatar', file);
+          
+          const updatedUser = await updateUserAvatar(formData, user.token);
+          
+          if (updatedUser) {
+            // Force browser to fetch new image by appending a timestamp
+            setUserInfo(prev => ({
+              ...prev,
+              avatar: updatedUser.avatar + '?t=' + Date.now()
+            }));
+          }
+        } catch (error) {
+          console.error("Avatar upload failed:", error);
+        }
+      };
+      
+
     useEffect(() => {
         getUserUsername(username).then(setUserInfo);
         getLists(username).then(setLists);
@@ -104,10 +129,34 @@ const Profile = () => {
 
     return (
         <div className='profile-container'>
-            <div className="profile-card flex flex-row items-center gap-4 px-5 pt-25">
-                <img src={userInfo.avatar || 'https://placehold.co/500x500'} className="w-30 " alt="Avatar"></img>
-                <span className="text-3xl font-bold">{userInfo.username}</span>
-            </div>
+        <div className="profile-card flex flex-row items-center gap-4 px-5 pt-25 relative group">
+        <div className="relative">
+            <img 
+                src={userInfo.avatar || 'https://placehold.co/500x500'} 
+                className="w-32 h-32 object-cover rounded-full"
+                alt="Avatar"
+            />
+            {/* Edit button overlay */}
+            {user?.username === username && (
+            <>
+                <input
+                type="file"
+                accept="image/png, image/jpeg"
+                className="hidden"
+                id="avatarInput"
+                onChange={(e) => handleAvatarUpload(e.target.files[0])}
+                />
+                <label 
+                htmlFor="avatarInput"
+                className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity"
+                >
+                <span className="text-white text-sm">Upload</span>
+                </label>
+            </>
+            )}
+        </div>
+        <span className="text-3xl font-bold">{userInfo.username}</span>
+        </div>
 
             <div className="profile-bio grid grid-flow sm:grid-flow-col gap-5 py-5 px-5 sm:px-20">
 
