@@ -19,3 +19,28 @@
 .reviews-container {
     padding: 0px;
 }
+
+.profile-review {
+    position: relative; /* Allow absolute positioning inside */
+}
+  
+  /* Style the delete button as a small button in the bottom-right corner */
+.delete-review-button {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: #ff4444; /* Bright red */
+    border: none;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+  
+.delete-review-button:hover {
+    background-color: #ff2222;
+}
+  
+  

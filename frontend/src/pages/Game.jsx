@@ -71,7 +71,7 @@ const Game = () => {
 
   // Calculate average rating based on reviews for this game.
   // Only include reviews where review.gameid matches the current gameId.
-  const gameReviews = reviews.filter(review => review.gameid === gameId);
+  const gameReviews = reviews.filter(review => review.gameId === gameId);
   const averageRating = gameReviews.length > 0 
     ? gameReviews.reduce((sum, review) => sum + review.rating, 0) / gameReviews.length 
     : null;
@@ -124,13 +124,19 @@ const Game = () => {
 
         {/* Reviews container scrolls independently */}
         <div className="reviews-container">
-          <GameReviews gameid={gameId} gameTitle={game.title} reviews={reviews} />
+          <GameReviews gameId={gameId} gameTitle={game.title} reviews={reviews} />
+
+          {user? (
           <ReviewForm 
-            gameid={gameId} 
+            gameId={gameId} 
             gametitle={game.title} 
             gameimage={game.image} 
             setReviews={setReviews} 
           />
+          ) : (
+
+            <p style={{ color: "#aaa" }}>Log in to post a review.</p>
+          )}
         </div>
       </div>
     </div>
