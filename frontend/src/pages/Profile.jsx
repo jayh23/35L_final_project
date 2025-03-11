@@ -10,6 +10,8 @@ import { useReviewService } from '../services/reviewService';
 import { useListService } from '../services/listService';
 import { useUserService } from '../services/userService';
 import { useAuthContext } from '../hooks/useAuthContext';
+
+
 // import { updateUserAvatar } from '../services/userService'; // Add this to your existing service imports
 
 
@@ -20,8 +22,7 @@ const Profile = () => {
     const { user } = useAuthContext();
 
     const { getUserUsername } = useUserService();
-    const { updateUserAvatar } = useUserService();
-    const { getLists } = useListService();
+    const { getLists, createList, deleteList } = useListService(); 
     const { getOneUserReviews } = useReviewService();
     
     const [lists, setLists] = useState([]);
@@ -43,14 +44,19 @@ const Profile = () => {
 
     const addListHandler = async (newList) => {
         if (!user) return;
-        
-        const createdList = await createList({ ...newList, userId: user._id }, user.token);
-        
-        if (createdList) {
-            setLists([...lists, createdList]); // 
-            return createdList; //
+    
+        try {
+            const createdList = await createList({ ...newList, userId: user._id });
+            if (createdList) {
+                setLists([...lists, createdList]); 
+                return createdList; 
+            }
+        } catch (error) {
+            console.error("Error creating list:", error);
         }
     };
+    
+    
 
     // Remove a list
     const removeListHandler = async (id) => {
@@ -65,12 +71,64 @@ const Profile = () => {
     const handleListClick = (list) => {
         setSelectedList(list);
     };
+
+    // // old version of useeffect below:
+    // useEffect(() => {
+    //     getLists(user.token).then((data) => {
+    //         console.log("Fetched lists:", data); 
+    //         setLists(data || []);
+    //     });
+    // }, [user]); 
+
     useEffect(() => {
-        getLists(user.token).then((data) => {
-            console.log("Fetched lists:", data); 
+        if (!user || !user.username) {
+            console.error("Error: user.username is undefined");
+            return;
+        }
+    
+        getLists(user.username).then((data) => {
+            console.log("Fetched lists for username:", user.username, data);
             setLists(data || []);
         });
-    }, [user]); 
+    }, [user]);
+    
+
+    // //for creating constant fav and library lists
+    // useEffect(() => {
+    //     if (!user || !user.username) return; // Prevents errors if user is not logged in
+    
+    //     const fetchLists = async () => {
+    //         try {
+    //             const response = await getLists(user.username);
+    //             if (!response) return;
+    
+    //             let userLists = response;
+                
+    //             //Check if "Library" and "Favorites" exist
+    //             const hasLibrary = userLists.some(list => list.category === "Library");
+    //             const hasFavorites = userLists.some(list => list.category === "Favorites");
+    
+    //             //Create missing default lists
+    //             if (!hasLibrary) {
+    //                 const libraryList = await createList({ category: "Library", privacy: false, games: [] });
+    //                 console.log("Created default Library list:", libraryList);
+    //             }
+    //             if (!hasFavorites) {
+    //                 const favoritesList = await createList({ category: "Favorites", privacy: false, games: [] });
+    //                 console.log("Created default Favorites list:", favoritesList);
+    //             }
+    
+    //             // Fetch lists again to update UI
+    //             const updatedLists = await getLists(user.username);
+    //             setLists(updatedLists);
+    //         } catch (error) {
+    //             console.error("Error fetching user lists:", error);
+    //         }
+    //     };
+    
+    //     fetchLists();
+    // }, [user]); // Runs when user logs in or their profile is accessed
+    
 
     // Function to delete a review (only for own profile)
     const handleDeleteReview = async (reviewId) => { // Added

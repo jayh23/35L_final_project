@@ -5,6 +5,8 @@ import "../styles/Game.css"; // <-- Import your dedicated Game page stylesheet
 import ReviewForm from '../components/ReviewForm.jsx';
 import GameReviews from '../components/GameReviews.jsx';
 import ListDropdown from "../components/ListDropdown.jsx";
+import RemoveFromListDropdown from "../components/RemoveFromListDropdown.jsx";
+
 
 //import Dropdown from "react-bootstrap/Dropdown";
 // import Review from '...'; // Mahima
@@ -127,6 +129,36 @@ const Game = () => {
     }
 };
 
+const handleRemoveFromList = async (listId, gameId) => {
+  console.log("Removing from list - List ID:", listId, "Game ID:", gameId);
+
+  if (!listId || !gameId) {
+    console.error("Error: Missing listId or gameId.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`/api/lists/remove/${listId}`, {
+      method: "PATCH",
+      headers: {
+        'Authorization': `Bearer ${user.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ games: [gameId] }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to remove game from list.");
+    }
+
+    console.log("Game removed successfully!");
+    fetchUserLists(); // 
+  } catch (error) {
+    console.error("Error removing game from list:", error);
+  }
+};
+
+
   // Calculate average rating based on reviews for this game.
   // Only include reviews where review.gameid matches the current gameId.
   const gameReviews = reviews.filter(review => review.gameId === gameId);
@@ -159,7 +191,13 @@ const Game = () => {
         {/* Display average rating calculated from reviews; fallback if no reviews exist */}
         <p>Rating: {averageRating ? averageRating.toFixed(1) : "No ratings yet"}</p>
         
-        {user && <ListDropdown lists={userLists} onSelectList={handleAddToList} gameId={gameId}/>}
+        {user && (
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "10px" }}>
+        <ListDropdown lists={userLists} onSelectList={handleAddToList} gameId={gameId} />
+        <RemoveFromListDropdown lists={userLists} onRemoveFromList={handleRemoveFromList} gameId={gameId} />
+        </div>
+        )}
+        
         {/* <button onClick={() => handleClick(0)} className="library-btn">
           Add to library
         </button>
