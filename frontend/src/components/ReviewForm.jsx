@@ -217,7 +217,7 @@ const ReviewForm = ({ gameId, gametitle, gameimage, reviews, setReviews }) => {
       {error && <p>{error}</p>}
       {isSubmitted && <p>Review Submitted!</p>}
       <form onSubmit={handleSubmit} className="submit-form">
-        <h2 className="user-name">{user.username}</h2>
+        <h2 className="review-heading">{user.username}</h2>
 
         <select
           value={rating}
@@ -238,9 +238,9 @@ const ReviewForm = ({ gameId, gametitle, gameimage, reviews, setReviews }) => {
           className="text-box"
         />
 
-        <label>
+        <label display="flex" align="center">
           Private Review
-          <input
+          <input 
             type="checkbox"
             checked={privacy}
             onChange={(e) => setPrivacy(e.target.checked)}
