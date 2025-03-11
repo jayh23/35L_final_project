@@ -28,7 +28,7 @@ const ProfileGameList = ({ list }) => {
             
             {/* Conditional rendering for empty games list */}
             {games.length === 0 ? (
-                <div className="text-center text-gray-500">
+                <div className="text-center text-gray-500 text-left text-sm">
                     No games added to this list.
                 </div>
             ) : (
