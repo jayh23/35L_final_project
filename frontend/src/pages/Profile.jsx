@@ -3,25 +3,56 @@ import { useParams } from 'react-router-dom';
 
 import ProfileGameList from '../components/profileComponents/ProfileGameList';
 import ProfileFriendCard from '../components/profileComponents/ProfileFriendCard';
-import ProfileReview from '../components/profileComponents/ProfileReview'
+import ProfileReview from '../components/profileComponents/ProfileReview';
+import ListPage from "../components/ListPage"; 
 
 import { useReviewService } from '../services/reviewService';
 import { useListService } from '../services/listService';
 import { useUserService } from '../services/userService';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 import '../styles/Profile.css';
 
+
 const Profile = () => {
     const { username } = useParams();
+    const { user } = useAuthContext();
+
 
     const { getUserUsername } = useUserService();
-    const { getLists } = useListService();
+    const { getLists, createList, deleteList } = useListService();
     const { getOneUserReviews } = useReviewService();
     
     const [lists, setLists] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [userInfo, setUserInfo] = useState({});
     const [friends, setFriends] = useState([]);
+
+    // Get the logged-in user info from auth context
+    const { user: loggedInUser } = useAuthContext(); // Added
+
+    // Add a new list
+    const addListHandler = async (newList) => {
+        if (!user) return;
+        const createdList = await createList({ ...newList, userId: user._id }, user.token);
+        if (createdList) {
+            setLists([...lists, createdList]);
+        }
+    };
+
+    // Remove a list
+    const removeListHandler = async (id) => {
+        if (!user) return;
+        const success = await deleteList(id, user.token);
+        if (success) {
+            setLists(lists.filter((list) => list._id !== id));
+        }
+    };
+
+    // Handle list click
+    const handleListClick = (list) => {
+        setSelectedList(list);
+    };
 
     useEffect(() => {
         getUserUsername(username).then(setUserInfo);
@@ -54,6 +85,17 @@ const Profile = () => {
                         ))}
                     </div>
                 </div>
+
+                <div className='profile-container'>
+                <div className="profile-lists-container">
+                <h1>Game Lists</h1>
+                 <ListPage
+                        lists={lists}
+                        addListHandler={addListHandler}
+                        removeListHandler={removeListHandler}
+                        onListClick={handleListClick} // Pass click handler
+                />
+            </div>
                 
                 <div className="reviews-container col-span-1">
                     <h1 className="text-2xl font-bold mb-3">Reviews</h1>
@@ -74,6 +116,7 @@ const Profile = () => {
                 </div>
 
             </div>
+        </div>
         </div>
     )
 }
