@@ -14,11 +14,6 @@ const storage = multer.diskStorage({
     // cb(null, 'public/avatars/'); // Create this directory
     cb(null, path.join(__dirname, '..', '..', 'frontend', 'public', 'avatars'));
   },
-//   filename: function (req, file, cb) {
-//     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-//     cb(null, req.user._id + '-' + uniqueSuffix + path.extname(file.originalname));
-//   }
-// In your upload.js (multer config):
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         cb(null, req.user._id + '-' + uniqueSuffix + path.extname(file.originalname));

@@ -100,9 +100,10 @@ const Profile = () => {
           formData.append('avatar', file);
           
           const updatedUser = await updateUserAvatar(formData, user.token);
+          await getUserUsername(username).then(data => setUserInfo(data));
+
           
           if (updatedUser) {
-            // Force browser to fetch new image by appending a timestamp
             setUserInfo(prev => ({
               ...prev,
               avatar: updatedUser.avatar + '?t=' + Date.now()
@@ -132,6 +133,7 @@ const Profile = () => {
         <div className="profile-card flex flex-row items-center gap-4 px-5 pt-25 relative group">
         <div className="relative">
             <img 
+                key={userInfo.avatar}
                 src={userInfo.avatar || 'https://placehold.co/500x500'} 
                 className="w-32 h-32 object-cover rounded-full"
                 alt="Avatar"
