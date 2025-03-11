@@ -1,53 +1,61 @@
 import React from 'react';
-import { Navigate } from './Navigate'; 
+import '../styles/listIndex.css';
 
-class AddList extends React.Component{
+class AddList extends React.Component {
     state = {
-        title: "",
-        description: "",
+        category: "", 
+        privacy: false, 
     };
 
     add = (e) => {
         e.preventDefault();
-        if(this.state.title === "" || this.state.description === ""){
-            alert("All fields are mandatory");
+        if (this.state.category === "") {
+            alert("Category is mandatory");
             return;
         }
         this.props.addListHandler(this.state);
-        this.setState({title: "", description: ""});
-        this.props.navigate("/");
+        this.setState({ category: "", privacy: false });
     };
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="ui main">
-                <h2> Create a New List!</h2>
+                <h2>Create a New List!</h2>
                 <form className="ui form" onSubmit={this.add}>
                     <div className="field">
-                        <label>Title</label>
-                        <input 
-                            type="text" 
-                            name="title" 
-                            placeholder="Title" 
-                            value={this.state.title}
-                            onChange={(e) => this.setState({title: e.target.value})}
+                        <label>Category</label>
+                        <input
+                            type="text"
+                            name="category"
+                            placeholder="Category"
+                            value={this.state.category}
+                            onChange={(e) => this.setState({ category: e.target.value })}
                         />
                     </div>
                     <div className="field">
-                        <label>Description</label>
-                        <input 
-                            type="text" 
-                            name="description" 
-                            placeholder="Description" 
-                            value={this.state.description}
-                            onChange={(e) => this.setState({description: e.target.value})}
-                        />
+                        <label>Privacy</label>
+                        <select
+                            name="privacy"
+                            value={this.state.privacy}
+                            onChange={(e) => this.setState({ privacy: e.target.value === "true" })}
+                        >
+                            <option value="false">Public</option>
+                            <option value="true">Private</option>
+                        </select>
                     </div>
-                    <button>Create</button>
+                    <button type="submit">Create</button>
+                    <button
+                        type="button"
+                        onClick={this.props.onCancel}
+                        className="ui button"
+                        style={{ marginLeft: "10px" }}
+                    >
+                        Cancel
+                    </button>
                 </form>
             </div>
         );
     }
-
 }
-export default Navigate(AddList);
+
+export default AddList;
