@@ -11,29 +11,29 @@ const Friends = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    const fetchFriends = async () => {
+        if (!user) return;
+        
+        try {
+            const response = await fetch('/api/friends', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
+            const data = await response.json();
+            
+            if (response.ok) {
+                setFriends(data.friends);
+            } else {
+                setError(data.error);
+            }
+        } catch (err) {
+            setError('Failed to fetch friends');
+        }
+    };
+    
     // Fetch friends list
     useEffect(() => {
-        const fetchFriends = async () => {
-            if (!user) return;
-            
-            try {
-                const response = await fetch('/api/friends', {
-                    headers: {
-                        'Authorization': `Bearer ${user.token}`
-                    }
-                });
-                const data = await response.json();
-                
-                if (response.ok) {
-                    setFriends(data.friends);
-                } else {
-                    setError(data.error);
-                }
-            } catch (err) {
-                setError('Failed to fetch friends');
-            }
-        };
-        
         fetchFriends();
     }, [user]);
 
@@ -137,7 +137,18 @@ const Friends = () => {
             if (response.ok) {
                 // Remove from requests and add to friends
                 setRequests(prev => prev.filter(r => r._id !== userId));
-                setFriends(prev => [...prev, data.user]);
+                
+                // Make sure data.user has all required fields
+                if (data.user && data.user._id && data.user.username) {
+                    setFriends(prev => [...prev, data.user]);
+                } else {
+                    // If the API doesn't return the complete user object,
+                    // find the user in the requests array
+                    const acceptedUser = requests.find(r => r._id === userId);
+                    if (acceptedUser) {
+                        setFriends(prev => [...prev, acceptedUser]);
+                    }
+                }
             } else {
                 setError(data.error);
             }
