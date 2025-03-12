@@ -249,14 +249,22 @@ const Profile = () => {
             <div className="profile-bio grid grid-cols-1 sm:grid-cols-[60vw_auto] gap-5 py-5 px-5 sm:px-20">
 
                 <div className="profile-bio-left col-span-1 grid gap-5"> 
-                    <div className="profile-lists-container">
-                        <h1 className="text-2xl font-bold mb-3">Game Lists</h1>
-                        <div className="flex flex-col gap-3">
-                            {lists.map((list) => (
-                                <ProfileGameList key={list._id} list={list} />
-                            ))}
-                        </div>
-                    </div>
+                     <div className="profile-lists-container">
+                         <h1 className="text-2xl font-bold mb-3">Game Lists</h1>
+                         <ListPage
+                             lists={lists}
+                             addListHandler={addListHandler}
+                             removeListHandler={removeListHandler}
+                             onListClick={handleListClick} // Pass click handler
+                         />
+                         <div className="flex flex-col gap-3">
+                             {lists.map((list) => (
+                                 <ProfileGameList key={list._id} list={list} />
+                             ))}
+                         </div>
+                      </div>
+                  
+
                     
                     <div className="profile-reviews-container">
                         <h1 className="text-2xl font-bold mb-3">Reviews</h1>
