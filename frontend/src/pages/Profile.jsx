@@ -12,8 +12,6 @@ import { useUserService } from '../services/userService';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 
-
-
 //import { updateUserAvatar } from '../services/userService'; // Add this to your existing service imports
 
 
@@ -59,8 +57,7 @@ const Profile = () => {
         }
     };
     
-    
-
+  
     // Remove a list
     const removeListHandler = async (id) => {
         if (!user) return;
@@ -83,54 +80,77 @@ const Profile = () => {
     //     });
     // }, [user]); 
 
-    useEffect(() => {
-        if (!user || !user.username) {
-            console.error("Error: user.username is undefined");
-            return;
-        }
-    
-        getLists(user.username).then((data) => {
-            console.log("Fetched lists for username:", user.username, data);
-            setLists(data || []);
-        });
-    }, [user]);
-    
 
-    // //for creating constant fav and library lists
+    const fetchAndCreateDefaultLists = async () => {
+      if (!user || !user.username) return;
+
+      try {
+          const userLists = await getLists(user.username);
+          setLists(userLists || []);
+
+          //Check if Library & Favorites exist
+          const hasLibrary = userLists.some(list => list.category === "Library");
+          const hasFavorites = userLists.some(list => list.category === "Favorites");
+
+          if (!hasLibrary) {
+              const libraryList = await createList({
+                  userId: user._id,
+                  category: "Library",
+                  privacy: false,
+                  games: []
+              });
+              console.log("Created Library list:", libraryList);
+              setLists(prevLists => [...prevLists, libraryList]);
+          }
+
+          if (!hasFavorites) {
+              const favoritesList = await createList({
+                  userId: user._id,
+                  category: "Favorites",
+                  privacy: false,
+                  games: []
+              });
+              console.log("Created Favorites list:", favoritesList);
+              setLists(prevLists => [...prevLists, favoritesList]);
+          }
+      } catch (error) {
+          console.error("Error checking/creating default lists:", error);
+      }
+  };
+
+
     // useEffect(() => {
-    //     if (!user || !user.username) return; // Prevents errors if user is not logged in
+    //     if (!user || !user.username) {
+    //         console.error("Error: user.username is undefined");
+    //         return;
+    //     }
     
-    //     const fetchLists = async () => {
-    //         try {
-    //             const response = await getLists(user.username);
-    //             if (!response) return;
+    //     getLists(user.username).then((data) => {
+    //         console.log("Fetched lists for username:", user.username, data);
+    //         setLists(data || []);
+    //     });
+    // }, [user]);
+
+    //UNCOMMENT USEFFECT ABOVE AND DELETE the 2 USEFFECTS BELOW if getting errors
+
+    useEffect(() => {
+      if (user && username === user.username) {
+          fetchAndCreateDefaultLists();
+      } else {
+          getLists(username).then(setLists);
+      }
+      getUserUsername(username).then(setUserInfo);
+      getOneUserReviews(username).then(setReviews);   
+  }, [username, user]);
+
+  useEffect(() => {
+      if (userInfo.friends) {
+          setFriends(userInfo.friends);
+      }
+  }, [userInfo.friends]);
+
+
     
-    //             let userLists = response;
-                
-    //             //Check if "Library" and "Favorites" exist
-    //             const hasLibrary = userLists.some(list => list.category === "Library");
-    //             const hasFavorites = userLists.some(list => list.category === "Favorites");
-    
-    //             //Create missing default lists
-    //             if (!hasLibrary) {
-    //                 const libraryList = await createList({ category: "Library", privacy: false, games: [] });
-    //                 console.log("Created default Library list:", libraryList);
-    //             }
-    //             if (!hasFavorites) {
-    //                 const favoritesList = await createList({ category: "Favorites", privacy: false, games: [] });
-    //                 console.log("Created default Favorites list:", favoritesList);
-    //             }
-    
-    //             // Fetch lists again to update UI
-    //             const updatedLists = await getLists(user.username);
-    //             setLists(updatedLists);
-    //         } catch (error) {
-    //             console.error("Error fetching user lists:", error);
-    //         }
-    //     };
-    
-    //     fetchLists();
-    // }, [user]); // Runs when user logs in or their profile is accessed
     
 
     // Function to delete a review (only for own profile)
