@@ -16,26 +16,6 @@ body, html {
   padding: 20px;
 }
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  background-color: #181818;
-  border-bottom: 2px solid #444;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  margin-left: 20px;
-}
-
-.nav-links a:hover {
-  color: #00aaff;
-}
-
 /* Main Sections */
 .trending-section, .friends-section {
   flex-grow: 1;

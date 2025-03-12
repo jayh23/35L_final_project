@@ -13,13 +13,12 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch} style={{ display: "flex", alignItems: "center" }}>
+    <form onSubmit={handleSearch} style={{ display: "flex", alignItems: "center" }} className="nav-link">
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for a game..."
-        style={{ marginRight: "8px" }}
       />
       <button type="submit">Search</button>
     </form>

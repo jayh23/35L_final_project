@@ -83,22 +83,32 @@ const ReviewForm = ({ gameId, gametitle, gameimage, reviews, setReviews }) => {
   return (
     <div>
       <h2 className="review-subheading">Enter a review:</h2>
-      {error && <p>{error}</p>}
       {isSubmitted && <p>Review Submitted!</p>}
       <form onSubmit={handleSubmit} className="submit-form">
         <h2 className="review-heading">{user.username}</h2>
 
-        <select
-          value={rating}
-          onChange={(e) => setRating(Number(e.target.value))}
-          className="selection-button"
-        >
-          {[1, 2, 3, 4, 5].map((num) => (
-            <option key={num} value={num}>
-              {num} Stars
-            </option>
-          ))}
-        </select>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <select
+            value={rating}
+            onChange={(e) => setRating(Number(e.target.value))}
+            className="selection-button"
+          >
+            {[1, 2, 3, 4, 5].map((num) => (
+              <option key={num} value={num}>
+                {num} Stars
+              </option>
+            ))}
+          </select>
+
+          <label display="flex">
+            <input 
+              type="checkbox"
+              checked={privacy}
+              onChange={(e) => setPrivacy(e.target.checked)}
+            />
+            <span> Private Review</span>
+          </label>
+        </div>
 
         <textarea
           placeholder="Write your review..."
@@ -107,18 +117,10 @@ const ReviewForm = ({ gameId, gametitle, gameimage, reviews, setReviews }) => {
           className="text-box"
         />
 
-        <label display="flex" align="center">
-          Private Review
-          <input 
-            type="checkbox"
-            checked={privacy}
-            onChange={(e) => setPrivacy(e.target.checked)}
-          />
-        </label>
-
         <button type="submit" className="submit-button" disabled={isLoading}>
           {isLoading ? "Submitting..." : "Submit Review"}
         </button>
+        <div className="review-error">{error && <p style={{ margin: "5px" }}>{error}</p>}</div>
       </form>
     </div>
   );
