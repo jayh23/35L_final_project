@@ -9,10 +9,10 @@ function toTitleCase(str) {
     return str.replace(/\b\w/g, char => char.toUpperCase());
 }
 
-const ProfileGameList = ({ list }) => {
+const ProfileGameList = ({ list, deletable, onDelete }) => {
     const { getGame } = useGameService();
-
     const [games, setGames] = useState([]);
+
 
     // Get a list of game objects using the list of game IDs.
     useEffect(() => {
@@ -21,11 +21,28 @@ const ProfileGameList = ({ list }) => {
         ).then(setGames);
     }, [list.games]);
 
+    const isDefaultList = list.category === "Favorites" || list.category === "Library";
+
     return (
         
         <div className="profile-list-card">
-            <div className="text-base pb-1">{toTitleCase(list.category)}</div>
+            <div className="flex justify-between items-center">
+                <div className="text-base pb-1">{toTitleCase(list.category)}</div>
             
+                {deletable && !isDefaultList &&(
+                    <button 
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            onDelete(list._id);
+                        }}
+                        className="delete-list-button"
+                    >
+                        Delete
+                    </button>
+                )}
+            </div>
+
             {/* Conditional rendering for empty games list */}
             {games.length === 0 ? (
                 <div className="text-center text-gray-500 text-left text-sm">
