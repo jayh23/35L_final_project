@@ -20,7 +20,7 @@ const Navbar = () => {
             {/* Allows user to logout if user is signed in. */}
             {user && (                
                 <nav className="navbar">
-                <Link to="/" className="nav-title text-2xl font-bold">GameBoxd</Link>
+                    <Link to="/" className="nav-title "><img src="../../public/images/gameboxd-logo-transp.png" alt="Gameboxd" className="logo"></img></Link>
                     <div className="nav-links">
                         {/*<Link to="/" className="nav-link">Home</Link>*/}
                         {/* <a href="/search">Search</a> */}
@@ -36,7 +36,7 @@ const Navbar = () => {
             {/* Allows user to login or signup if user is not signed in. */}
             {!user && (
                 <nav className="navbar">
-                <Link to="/" className="nav-title text-2xl font-bold">GameBoxd</Link>
+                    <Link to="/" className="nav-title"><img src="../../public/images/gameboxd-logo-transp.png" alt="Gameboxd" className="logo"></img></Link>
                 <div className="nav-links">
                   {/* <a href="/search">Search</a> */}
                   <SearchBar className="nav-link" />

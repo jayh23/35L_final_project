@@ -34,14 +34,6 @@ const Profile = () => {
     // Get the logged-in user info from auth context
     const { user: loggedInUser } = useAuthContext(); // Added
 
-    // Add a new list
-    // const addListHandler = async (newList) => {
-    //     if (!user) return;
-    //     const createdList = await createList({ ...newList, userId: user._id }, user.token);
-    //     if (createdList) {
-    //         setLists([...lists, createdList]);
-    //     }
-    // };
 
     const addListHandler = async (newList) => {
         if (!user) return;
@@ -59,26 +51,23 @@ const Profile = () => {
     
   
     // Remove a list
-    const removeListHandler = async (id) => {
+    const removeListHandler = async (listId) => {
         if (!user) return;
-        const success = await deleteList(id, user.token);
-        if (success) {
-            setLists(lists.filter((list) => list._id !== id));
-        }
+        try {
+          const success = await deleteList(listId, user.token);
+          if (success) {
+              setLists(prevLists => prevLists.filter(list => list._id !== listId));
+              console.log(" List deleted successfully");
+          }
+      } catch (error) {
+          console.error("Error deleting list:", error);
+      }
     };
 
     // Handle list click
     const handleListClick = (list) => {
         setSelectedList(list);
     };
-
-    // // old version of useeffect below:
-    // useEffect(() => {
-    //     getLists(user.token).then((data) => {
-    //         console.log("Fetched lists:", data); 
-    //         setLists(data || []);
-    //     });
-    // }, [user]); 
 
 
     const fetchAndCreateDefaultLists = async () => {
@@ -119,20 +108,7 @@ const Profile = () => {
   };
 
 
-    // useEffect(() => {
-    //     if (!user || !user.username) {
-    //         console.error("Error: user.username is undefined");
-    //         return;
-    //     }
-    
-    //     getLists(user.username).then((data) => {
-    //         console.log("Fetched lists for username:", user.username, data);
-    //         setLists(data || []);
-    //     });
-    // }, [user]);
-
-    //UNCOMMENT USEFFECT ABOVE AND DELETE the 2 USEFFECTS BELOW if getting errors
-
+  
     useEffect(() => {
       if (user && username === user.username) {
           fetchAndCreateDefaultLists();
@@ -151,8 +127,6 @@ const Profile = () => {
 
 
     
-    
-
     // Function to delete a review (only for own profile)
     const handleDeleteReview = async (reviewId) => { // Added
       try {
@@ -249,14 +223,29 @@ const Profile = () => {
             <div className="profile-bio grid grid-cols-1 sm:grid-cols-[60vw_auto] gap-5 py-5 px-5 sm:px-20">
 
                 <div className="profile-bio-left col-span-1 grid gap-5"> 
-                    <div className="profile-lists-container">
-                        <h1 className="text-2xl font-bold mb-3">Game Lists</h1>
-                        <div className="flex flex-col gap-3">
-                            {lists.map((list) => (
-                                <ProfileGameList key={list._id} list={list} />
-                            ))}
-                        </div>
-                    </div>
+                     <div className="profile-lists-container">
+                         <h1 className="text-2xl font-bold mb-3">Game Lists</h1>
+                         {user?.username === username && (
+                         <ListPage
+                             lists={lists}
+                             addListHandler={addListHandler}
+                             removeListHandler={removeListHandler}
+                             onListClick={handleListClick} // Pass click handler
+                         />
+                        )}
+                         <div className="flex flex-col gap-3">
+                          {lists.map((list) =>(
+                            <ProfileGameList 
+                            key={list._id} 
+                            list={list}
+                            deletable={user?.username === username} //Show delete button only for owner
+                            onDelete={removeListHandler} //Pass the delete function
+                            />
+                          ))}
+                         </div>
+                      </div>
+                  
+
                     
                     <div className="profile-reviews-container">
                         <h1 className="text-2xl font-bold mb-3">Reviews</h1>
