@@ -14,6 +14,11 @@
   padding: 20px 20px;
 }
 
+.navbar .nav-title .logo {
+    height: 50px;
+    width: auto;
+}
+
 .nav-links {
   height: 100%;
   width: 100%;
