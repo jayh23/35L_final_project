@@ -16,14 +16,14 @@ const ProfileReview = ({ review, deletable, onDelete }) => { // Added deletable 
     }, [review.gameId]);
 
     return (
-        <Link to={`/games/${game._id}`} className="profile-review flex items-start gap-4 p-2">
+        <Link to={`/games/${game._id}`} className="profile-review group flex items-start gap-4 p-2">
             {/* Game Image */}
             <img src={game.image} className="w-15 object-cover" alt={game.title} />
         
             {/* Review Content */}
             <div className="flex flex-col flex-1">
                 {/* Title and Rating */}
-                <h3 className="text-lg font-semibold text-white">{game.title}</h3>
+                <h3 className="text-lg font-semibold text-white group-hover:underline">{game.title}</h3>
                 <span className="text-yellow-400 font-bold">
                     {'★'.repeat(Math.floor(review.rating))}
                 </span>

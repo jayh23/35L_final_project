@@ -20,15 +20,15 @@ const Navbar = () => {
             {/* Allows user to logout if user is signed in. */}
             {user && (                
                 <nav className="navbar">
-                <h1>GameBoxd</h1>
-                <div className="nav-links">
-                  <Link to="/">Home</Link>
-                  {/* <a href="/search">Search</a> */}
-                  <SearchBar />
-                  <Link to="/friends">Friends</Link>
-                  <Link to={`/profile/${user.username}`}>{user.username}</Link>
-                  <button onClick={handleClick}>Log out</button>
-                </div>
+                <Link to="/" className="nav-title text-2xl font-bold">GameBoxd</Link>
+                    <div className="nav-links">
+                        {/*<Link to="/" className="nav-link">Home</Link>*/}
+                        {/* <a href="/search">Search</a> */}
+                        <SearchBar className="nav-link" />
+                        <Link to="/friends" className="nav-link tab"><span>Friends</span></Link>
+                        <Link to={`/profile/${user.username}`} className="nav-link tab"><span>{user.username}</span></Link>
+                        <div className="nav-link"><button onClick={handleClick}>Log out</button></div>
+                    </div>
                 </nav>
 
                 
@@ -38,11 +38,11 @@ const Navbar = () => {
                 <nav className="navbar">
                 <h1>GameBoxd</h1>
                 <div className="nav-links">
-                  <Link to="/">Home</Link>
+                  <Link to="/" className="nav-link">Home</Link>
                   {/* <a href="/search">Search</a> */}
-                  <SearchBar />
-                  <Link to="/login">Login</Link>
-                  <Link to="/signup">Signup</Link>
+                  <SearchBar className="nav-link" />
+                  <Link to="/login" className="nav-link">Login</Link>
+                  <Link to="/signup" className="nav-link">Signup</Link>
                 </div>
                 </nav>
 

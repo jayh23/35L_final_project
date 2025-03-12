@@ -42,7 +42,7 @@
 
 .search-form button {
     padding: 10px 15px;
-    background-color: #1c7ed6;
+    background-color: #4466ff;
     color: white;
     border: none;
     border-radius: 0 5px 5px 0;
@@ -51,7 +51,7 @@
 }
 
 .search-form button:hover:not(:disabled) {
-    background-color: #0b5ed7;
+    background-color: #3651c5;
 }
 
 .search-form button:disabled {
