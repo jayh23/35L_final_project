@@ -1,32 +1,28 @@
 import { useAuthContext } from "../hooks/useAuthContext.js";
 import "../styles/Review.css";
 
-const GameReviews = ({ gameid, gameTitle, reviews = [] }) => {
+const GameReviews = ({ gameId, gameTitle, reviews = [] }) => {
   const { user } = useAuthContext();
 
   // Filter reviews for the game and exclude private reviews
   const gameReviews = reviews.filter(
-    (review) => review.gameid === gameid && !review.privacy
+    (review) => review.gameId === gameId && !review.privacy
   );
 
     console.log('Reviews:', reviews);
   return (
     <div>
-      <h1>Reviews for {gameTitle}</h1>
+      <h1 className="review-subheading">Reviews for {gameTitle}</h1>
       {gameReviews.length > 0 ? (
         gameReviews.map((review) => (
           <div key={review._id} className="review-display">
-            <h3 className="review-info">{review.username}</h3>
-            <img
-              src={review.gameimage}
-              width="100px"
-              height="150px"
-              align="right"
-              alt={review.gamename}
-            />
-            <h4 className="review-info">
-              {review.gamename}: {review.rating}⭐
-            </h4>
+           <div className="review-title"> 
+            <h3 className="user-name">{review.username}</h3>
+            <span className="game-name">{review.gamename}</span>
+          </div>
+            <div className="review-rating text-yellow-400 font-bold">
+              {'★'.repeat(Math.floor(review.rating))}
+            </div>
             <p className="review-text">{review.text}</p>
           </div>
         ))

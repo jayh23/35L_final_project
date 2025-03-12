@@ -1,6 +1,5 @@
 
 body {
-    background-color: #181818; 
     color: #ffffff;
     font-family: "Helvetica Neue", Arial, sans-serif;
     margin: 0;
@@ -73,12 +72,8 @@ h2 {
 }
 
 a {
-    color: #1c7ed6;
+    color: #ffffff;
     text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
 }
 
 .list-header {
@@ -92,4 +87,79 @@ a:hover {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+}
+
+.add-list-container {
+    max-width: 350px; 
+    padding: 15px; 
+    border-radius: 8px;
+    position: relative;
+    top: -30px;
+    left: -150px;
+}
+
+
+.add-list-title {
+    font-size: 18px; 
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+.add-list-form .field label {
+    font-size: 14px; 
+}
+
+.add-list-form input,
+.add-list-form select {
+    font-size: 14px;
+    padding: 5px; 
+}
+
+
+.add-list-form .button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; 
+
+}
+
+.add-list-form button {
+    font-size: 14px; 
+    padding: 5px 10px;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    position: relative;
+    left: -2px;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
+    color: white;
+}
+
+.create-button {
+    background-color: #1c7ed6; 
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+
+.create-button:hover {
+    background-color: #0b5ed7; 
 }

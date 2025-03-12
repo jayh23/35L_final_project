@@ -1,16 +1,17 @@
 import mongoose from 'mongoose';
 
 import List from '../models/listModel.js';
+import User from '../models/userModel.js';
 
 // Get all game lists for a specific user.
 export const getLists = async (req, res) => {
+    const { username } = req.params;
 
     try {
-        // Find the current user id.
-        const userId = req.user._id;
+        const user = await User.findOne({ username });
 
         // Find lists associated with the current user.
-        const lists = await List.find({ userId: userId });
+        const lists = await List.find({ userId: user._id });
 
         res.status(200).json({ data: lists });
     } catch (error) {
@@ -27,8 +28,7 @@ export const getList = async (req, res) => {
     }
 
     try {
-        // Find the current user id.
-        const userId = req.user._id;
+        const user = await User.findOne({ username });
 
         // Find lists associated with the current user.
         const list = await List.findOne({ _id: id, userId: userId });

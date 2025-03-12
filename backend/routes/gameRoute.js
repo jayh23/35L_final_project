@@ -3,7 +3,6 @@ import express from 'express';
 // Controller functions.
 import { getGames, getGameById, searchGames, getGamesByGenre } from '../controllers/gameController.js';
 
-
 const router = express.Router();
 
 // GET all games.

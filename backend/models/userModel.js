@@ -17,6 +17,9 @@ const userSchema = new mongoose.Schema({
     avatar: {
         type: String,
     },
+    banner: {
+        type: String,
+    },
     friends: {
         type: [String],
     },

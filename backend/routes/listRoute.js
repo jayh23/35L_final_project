@@ -5,25 +5,22 @@ import { getLists, getList, createList, addGameToList, removeGameFromList, delet
 
 const router = express.Router();
 
-// Protect all list routes with authentication middleware.
-router.use(requireAuth);
-
 // GET all lists.
-router.get('/', getLists);
+router.get('/:username', getLists);
 
 // GET a list.
 router.get('/:id', getList);
 
 // POST a new list.
-router.post('/', createList);
+router.post('/', requireAuth, createList);
 
 // PATCH (add a game to) a list.
-router.patch('/add/:id', addGameToList);
+router.patch('/add/:id', requireAuth, addGameToList);
 
 // PATCH (remove a game from) a list.
-router.patch('/remove/:id', removeGameFromList);
+router.patch('/remove/:id', requireAuth, removeGameFromList);
 
 // DELETE a list.
-router.delete('/:id', deleteList);
+router.delete('/:id', requireAuth, deleteList);
 
 export default router;

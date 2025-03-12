@@ -1,20 +1,12 @@
 import { useAuthContext } from '../hooks/useAuthContext';
 
+
 export const useListService = () => {
     const { user } = useAuthContext();
 
-    if (!user) {
-        console.error("User is not authenticated.");
-        return [];
-    }
-
-    const getLists = async () => {
+    const getLists = async (username) => {
         try {
-            const response = await fetch('/api/lists', {
-                headers: {
-                    'Authorization': `Bearer ${user.token}`,
-                },
-            });
+            const response = await fetch(`/api/lists/${username}`);
             const data = await response.json();
     
             if (response.ok) {

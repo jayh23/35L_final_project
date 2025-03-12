@@ -12,11 +12,15 @@ const listSchema = new mongoose.Schema({
     },
     category: {
         type: String, // 0 owned, 1 favorites, 2 custom
-        required: true,
-        unique: true
-    }
+        required: true
+        //unique: true
+    },
  });
 
+ //Ensure uniqueness of `category` per `userId`
+listSchema.index({ userId: 1, category: 1 }, { unique: true });
+
  const List = mongoose.model('List', listSchema);
+
 
  export default List;
