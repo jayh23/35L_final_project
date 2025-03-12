@@ -83,7 +83,6 @@ const ReviewForm = ({ gameId, gametitle, gameimage, reviews, setReviews }) => {
   return (
     <div>
       <h2 className="review-subheading">Enter a review:</h2>
-      {isSubmitted && <p>Review Submitted!</p>}
       <form onSubmit={handleSubmit} className="submit-form">
         <h2 className="review-heading">{user.username}</h2>
 
@@ -121,6 +120,7 @@ const ReviewForm = ({ gameId, gametitle, gameimage, reviews, setReviews }) => {
           {isLoading ? "Submitting..." : "Submit Review"}
         </button>
         <div className="review-error">{error && <p style={{ margin: "5px" }}>{error}</p>}</div>
+        <div className="review-success">{isSubmitted && <p style={{ margin: "5px" }}>Review Submitted!</p>}</div>
       </form>
     </div>
   );
