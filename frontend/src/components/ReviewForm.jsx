@@ -26,12 +26,14 @@ const ReviewForm = ({ gameId, gametitle, gameimage, reviews, setReviews }) => {
   
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent form from refreshing the page
+    //e.preventDefault(); // Prevent form from refreshing the page
 
     if (hasReviewed) {
+      e.preventDefault();
       setError("You have already submitted a review for this game.");
       return;
     }
+    
     
     const review = {
       gameId,
