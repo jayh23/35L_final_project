@@ -36,13 +36,12 @@ const Navbar = () => {
             {/* Allows user to login or signup if user is not signed in. */}
             {!user && (
                 <nav className="navbar">
-                <h1>GameBoxd</h1>
+                <Link to="/" className="nav-title text-2xl font-bold">GameBoxd</Link>
                 <div className="nav-links">
-                  <Link to="/" className="nav-link">Home</Link>
                   {/* <a href="/search">Search</a> */}
                   <SearchBar className="nav-link" />
-                  <Link to="/login" className="nav-link">Login</Link>
-                  <Link to="/signup" className="nav-link">Signup</Link>
+                  <Link to="/login" className="nav-link tab"><span>Login</span></Link>
+                  <Link to="/signup" className="nav-link tab"><span>Signup</span></Link>
                 </div>
                 </nav>
 
