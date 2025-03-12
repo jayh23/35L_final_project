@@ -7,7 +7,7 @@
   align-items: center;
   background-color: #181818;
   border-bottom: 2px solid #444;
-  min-height: 10vh;
+  height: 70px;
 }
 
 .navbar .nav-title {
@@ -58,7 +58,6 @@
   align-items: center;
   gap: 0px;
   justify-content: center;
-  height: 100%;
 }
 
 .nav-links input[type="text"] {
