@@ -15,15 +15,16 @@ class AddList extends React.Component {
         }
         this.props.addListHandler(this.state);
         this.setState({ category: "", privacy: false });
+        this.props.onCancel();
     };
 
     render() {
         return (
-            <div className="ui main">
-                <h2>Create a New List!</h2>
-                <form className="ui form" onSubmit={this.add}>
+            <div className="ui main add-list-container">
+                <h2 className="add-list-title">Create a New List!</h2>
+                <form className="ui form add-list-form" onSubmit={this.add}>
                     <div className="field">
-                        <label>Category</label>
+                        <label style={{ fontWeight: "bold" }}>Category</label>
                         <input
                             type="text"
                             name="category"
@@ -33,7 +34,7 @@ class AddList extends React.Component {
                         />
                     </div>
                     <div className="field">
-                        <label>Privacy</label>
+                        <label style={{ fontWeight: "bold" }}>Privacy:</label>
                         <select
                             name="privacy"
                             value={this.state.privacy}
@@ -43,15 +44,21 @@ class AddList extends React.Component {
                             <option value="true">Private</option>
                         </select>
                     </div>
-                    <button type="submit">Create</button>
-                    <button
-                        type="button"
-                        onClick={this.props.onCancel}
-                        className="ui button"
-                        style={{ marginLeft: "10px" }}
-                    >
-                        Cancel
-                    </button>
+                    <div className="button-group">
+                        <button 
+                            type="submit" 
+                            className="create-button"
+                            >
+                                Create
+                        </button>
+                        <button
+                            type="button"
+                            className ="delete-button"
+                            onClick={this.props.onCancel}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </form>
             </div>
         );

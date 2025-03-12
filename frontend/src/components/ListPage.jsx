@@ -1,74 +1,17 @@
-// import React, {useState, useEffect} from "react";
-// import { v4 as uuid } from "uuid"
-// import AddList from "./AddList.jsx";
-// import UserList from "./UserList.jsx";
-// import Header from "./Header.jsx";
-// import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-
-// const testData = [
-
-// ]
-
-// function ListPage(){
-//     const LOCAL_STORAGE_KEY = "lists";
-//     const [lists, setLists] = useState([]);
-
-//     const addListHandler = (list) => {
-//         console.log(list);
-//         setLists([...lists, {id: uuid(), ...list }]);
-
-//     };
-
-//     const removeListHandler = (id) => {
-//         const newUserList = lists.filter((list) => {
-//             return list.id !== id;
-//         });
- 
-//         setLists(newUserList);
-//     };
-
-//     useEffect(() => {
-//         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(lists));
-//     }, [lists]);
-
-//     useEffect(()=>{
-//         const getLists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY, JSON.stringify(lists)));
-//         if(getLists) setLists(getLists);
-//     }, []);
-
-//     return (
-//         <div className="ui container">
-//             <Router>
-//                 <Header />
-//                 <Routes>
-//                     <Route path="/" element={<UserList lists={lists} getListId={removeListHandler}/>} />
-//                     <Route path="/add" element={<AddList addListHandler={addListHandler} />}/>
-//                 </Routes>
-//             </Router>
-//         </div>
-//     );
-// }
-// export default ListPage;
-
-
 
 import React, { useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import "../styles/listIndex.css";
+import AddList from './AddList';
 
 
-const ListPage = ({ lists = [], addListHandler, removeListHandler, onListClick }) => {
+
+const ListPage = ({  addListHandler, removeListHandler}) => {
     const { user } = useAuthContext();
     const [showAddForm, setShowAddForm] = useState(false);
     const [newList, setNewList] = useState({ category: '', privacy: false });
 
-    // // Handle form submission for adding a new list
-    // const handleAddList = (e) => {
-    //     e.preventDefault();
-    //     addListHandler(newList);
-    //     setNewList({ category: '', privacy: false });
-    //     setShowAddForm(false);
-    // };
+
 
     const handleAddList = async (e) => {
         e.preventDefault();
@@ -84,16 +27,19 @@ const ListPage = ({ lists = [], addListHandler, removeListHandler, onListClick }
 
     return (
         <div>
-            <button
-                onClick={() => setShowAddForm(!showAddForm)}
-                style={{ marginBottom: '20px' }}
-                className="ui button"
+            {!showAddForm && (
+                
+                <button
+                onClick={() => setShowAddForm(true)}
+                className="ui button primary"
+                style={{ marginBottom: "20px" }}
             >
-                {showAddForm ? "Cancel" : "Add Game List"}
+                Add List
             </button>
+        )}
 
             {/* Add List Form */}
-            {showAddForm && (
+            {/* {showAddForm && (
                 <form onSubmit={handleAddList}>
 
 
@@ -121,6 +67,13 @@ const ListPage = ({ lists = [], addListHandler, removeListHandler, onListClick }
                         className="ui button primary">
                         Create List!</button>
                 </form>
+            )} */}
+
+                {showAddForm && (
+                <AddList 
+                    addListHandler={addListHandler} 
+                    onCancel={() => setShowAddForm(false)} 
+                />
             )}
 
         </div>
