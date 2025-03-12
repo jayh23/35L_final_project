@@ -18,10 +18,11 @@ const GameReviews = ({ gameId, gameTitle, reviews = [] }) => {
           <div key={review._id} className="review-display">
            <div className="review-title"> 
             <h3 className="user-name">{review.username}</h3>
-            <h4 className="game-name">
-              {review.gamename}: {review.rating}⭐  
-            </h4>
+            <span className="game-name">{review.gamename}</span>
           </div>
+            <div className="review-rating text-yellow-400 font-bold">
+              {'★'.repeat(Math.floor(review.rating))}
+            </div>
             <p className="review-text">{review.text}</p>
           </div>
         ))

@@ -1,20 +1,88 @@
+
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #181818;
+  border-bottom: 2px solid #444;
+  height: 70px;
+}
+
+.navbar .nav-title {
+  padding: 20px 20px;
+}
+
 .nav-links {
+  height: 100%;
+  width: 100%;
+  justify-content: end;
+  padding-left: 20px;
+  padding-right: 20px;
   display: flex;
   align-items: center;
-  gap: 20px; /* space between items */
+}
+
+.nav-links .nav-link {
+  padding-left: 10px;
+  padding-right: 10px
+}
+
+.nav-links .nav-link.tab {
+  height: 10vh;
+  display: flex;
+}
+
+.nav-links .nav-link.tab:hover {
+  background-color: #353535;
+}
+
+.nav-links .nav-link span {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  height: 100%;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
 }
 
 .nav-links form {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0px;
+  justify-content: center;
 }
 
 .nav-links input[type="text"] {
   border-radius: 4px;
-  padding: 4px 8px;
-  border: 1px solid #ccc;
+  padding: 5px 8px;
   outline: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  box-sizing: border-box;
+  height: 100%;
+  background-color: #353535;
+}
+
+.nav-links input[type="text"]:focus {
+  border: 1px solid white;  /* Blue border when focused */
+}
+
+.nav-links input::placeholder {
+  font-size: 12px; /* Adjust this size as needed */
+}
+
+.nav-links form button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  height: 100%;
 }
 
 /* Default button styles for all buttons in nav-links */
@@ -22,7 +90,7 @@
   border: none;
   background-color: #ff4444; /* red */
   color: #fff;
-  padding: 6px 12px;
+  padding: 3px 12px;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -37,5 +105,5 @@
 }
 
 .nav-links form button:hover {
-  background-color: #2244ff; /* darker blue on hover */
+  background-color: #3651c5; /* darker blue on hover */
 }

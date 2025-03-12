@@ -62,13 +62,25 @@ const ListPage = ({ lists = [], addListHandler, removeListHandler, onListClick }
     const [showAddForm, setShowAddForm] = useState(false);
     const [newList, setNewList] = useState({ category: '', privacy: false });
 
-    // Handle form submission for adding a new list
-    const handleAddList = (e) => {
+    // // Handle form submission for adding a new list
+    // const handleAddList = (e) => {
+    //     e.preventDefault();
+    //     addListHandler(newList);
+    //     setNewList({ category: '', privacy: false });
+    //     setShowAddForm(false);
+    // };
+
+    const handleAddList = async (e) => {
         e.preventDefault();
-        addListHandler(newList);
-        setNewList({ category: '', privacy: false });
-        setShowAddForm(false);
+        
+        const createdList = await addListHandler(newList); // Ensure this function returns the new list from the backend
+        
+        if (createdList) {
+            setNewList({ category: '', privacy: false });
+            setShowAddForm(false);
+        }
     };
+    
 
     return (
         <div>
@@ -77,12 +89,13 @@ const ListPage = ({ lists = [], addListHandler, removeListHandler, onListClick }
                 style={{ marginBottom: '20px' }}
                 className="ui button"
             >
-                {showAddForm ? "Cancel" : "Add List"}
+                {showAddForm ? "Cancel" : "Add Game List"}
             </button>
 
             {/* Add List Form */}
             {showAddForm && (
                 <form onSubmit={handleAddList}>
+
 
                     <div>
                         <label>Category</label>
