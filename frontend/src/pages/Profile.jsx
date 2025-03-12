@@ -246,32 +246,34 @@ const Profile = () => {
 </div>
 
 
-            <div className="profile-bio grid grid-flow sm:grid-flow-col gap-5 py-5 px-5 sm:px-20">
+            <div className="profile-bio grid grid-cols-1 sm:grid-cols-[60vw_auto] gap-5 py-5 px-5 sm:px-20">
 
-                <div className="profile-lists-container col-span-2">
-                    <h1 className="text-2xl font-bold mb-3">Game Lists</h1>
-                    <div className="flex flex-col gap-3">
-                        {lists.map((list) => (
-                            <ProfileGameList key={list._id} list={list} />
-                        ))}
+                <div className="profile-bio-left col-span-1 grid gap-5"> 
+                    <div className="profile-lists-container">
+                        <h1 className="text-2xl font-bold mb-3">Game Lists</h1>
+                        <div className="flex flex-col gap-3">
+                            {lists.map((list) => (
+                                <ProfileGameList key={list._id} list={list} />
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="profile-reviews-container">
+                        <h1 className="text-2xl font-bold mb-3">Reviews</h1>
+                        <div className="flex flex-col">
+                            {reviews.map((review) => (
+                                <ProfileReview 
+                                    key={review._id} 
+                                    review={review}
+                                    deletable={loggedInUser && loggedInUser.username === username}  // Added: only show delete button on your own profile
+                                    onDelete={handleDeleteReview}  // Added: pass delete handler
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
-                
-                <div className="reviews-container col-span-2">
-                    <h1 className="text-2xl font-bold mb-3">Reviews</h1>
-                    <div className="flex flex-col">
-                        {reviews.map((review) => (
-                            <ProfileReview 
-                                key={review._id} 
-                                review={review}
-                                deletable={loggedInUser && loggedInUser.username === username}  // Added: only show delete button on your own profile
-                                onDelete={handleDeleteReview}  // Added: pass delete handler
-                            />
-                        ))}
-                    </div>
-                </div>
 
-                <div className="profile-friends-container col-span-2 sm:row-span-2">
+                <div className="profile-friends-container col-span-1">
                     <h1 className="text-2xl font-bold mb-3">Friends</h1>
                     <div className="friends">
                         {friends.map((friend) => (
