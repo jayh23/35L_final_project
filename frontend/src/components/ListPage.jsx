@@ -38,37 +38,6 @@ const ListPage = ({  addListHandler, removeListHandler}) => {
             </button>
         )}
 
-            {/* Add List Form */}
-            {/* {showAddForm && (
-                <form onSubmit={handleAddList}>
-
-
-                    <div>
-                        <label>Category</label>
-                        <input
-                            type="text"
-                            placeholder="Category"
-                            value={newList.category}
-                            onChange={(e) => setNewList({ ...newList, category: e.target.value })}
-                        />
-                    </div>
-                    <div>
-                        <label>Privacy</label>
-                        <select
-                            value={newList.privacy}
-                            onChange={(e) => setNewList({ ...newList, privacy: e.target.value === 'true' })}
-                        >
-                            <option value="false">Public</option>
-                            <option value="true">Private</option>
-                        </select>
-                    </div>
-                    <button 
-                        type="submit"
-                        className="ui button primary">
-                        Create List!</button>
-                </form>
-            )} */}
-
                 {showAddForm && (
                 <AddList 
                     addListHandler={addListHandler} 
