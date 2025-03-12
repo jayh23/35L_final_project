@@ -11,15 +11,21 @@ Description of the project
 - **Profile and friends**: 
 ## Setup
 ### Backend
-**Setting up**  
-`cd backend  
-npm install`  
-Talk about dependencies  
-**Running**  
-`cd backend  
-npm start`  
+**Setting up**
+```
+cd backend
+npm install
+```
+Talk about dependencies\
+**Running**
+```
+cd backend
+npm start
+```
 ### Frontend
-`cd frontend  
-npm install`
+```
+cd frontend
+npm install
+```
 ## Authors
 Created for CS 35L by Mahima Bhella, Jaanya Chawla, Daphne Feng, Jay Horsley, and Siddharth Taneja.
