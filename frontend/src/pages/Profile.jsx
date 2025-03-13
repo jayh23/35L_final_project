@@ -247,20 +247,31 @@ const Profile = () => {
                   
 
                     
-                    <div className="profile-reviews-container">
-                        <h1 className="text-2xl font-bold mb-3">Reviews</h1>
-                        <div className="flex flex-col">
-                            {reviews.map((review) => (
-                                <ProfileReview 
-                                    key={review._id} 
-                                    review={review}
-                                    deletable={loggedInUser && loggedInUser.username === username}  // Added: only show delete button on your own profile
-                                    onDelete={handleDeleteReview}  // Added: pass delete handler
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </div>
+     <div className="profile-reviews-container">
+        <h1 className="text-2xl font-bold mb-3">Reviews</h1>
+  <div className="flex flex-col">
+    {reviews
+      // Filter reviews based on privacy and ownership
+      .filter((review) => {
+        // If the logged-in user is viewing their own profile, show all reviews (including private ones)
+        if (loggedInUser && loggedInUser.username === username) {
+          return true;
+        }
+        // If viewing someone else's profile, only show non-private reviews
+        return !review.privacy;
+      })
+      // Map through the filtered reviews
+      .map((review) => (
+        <ProfileReview
+          key={review._id}
+          review={review}
+          deletable={loggedInUser && loggedInUser.username === username} // Only show delete button on your own profile
+          onDelete={handleDeleteReview} // Pass delete handler
+        />
+      ))}
+  </div>
+</div>
+</div> 
 
                 <div className="profile-friends-container col-span-1">
                     <h1 className="text-2xl font-bold mb-3">Friends</h1>
