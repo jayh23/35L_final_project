@@ -70,54 +70,57 @@ const Profile = () => {
     };
 
 
-    const fetchAndCreateDefaultLists = async () => {
-      if (!user || !user.username) return;
+  //   const fetchAndCreateDefaultLists = async () => {
+  //     if (!user || !user.username) return;
 
-      try {
-          const userLists = await getLists(user.username);
-          setLists(userLists || []);
+  //     try {
+  //         const userLists = await getLists(user.username);
+  //         setLists(userLists || []);
 
-          //Check if Library & Favorites exist
-          const hasLibrary = userLists.some(list => list.category === "Library");
-          const hasFavorites = userLists.some(list => list.category === "Favorites");
+  //         //Check if Library & Favorites exist
+  //         const hasLibrary = userLists.some(list => list.category === "Library");
+  //         const hasFavorites = userLists.some(list => list.category === "Favorites");
 
-          if (!hasLibrary) {
-              const libraryList = await createList({
-                  userId: user._id,
-                  category: "Library",
-                  privacy: false,
-                  games: []
-              });
-              console.log("Created Library list:", libraryList);
-              setLists(prevLists => [...prevLists, libraryList]);
-          }
+  //         if (!hasLibrary) {
+  //             const libraryList = await createList({
+  //                 userId: user._id,
+  //                 category: "Library",
+  //                 privacy: false,
+  //                 games: []
+  //             });
+  //             console.log("Created Library list:", libraryList);
+  //             setLists(prevLists => [...prevLists, libraryList]);
+  //         }
 
-          if (!hasFavorites) {
-              const favoritesList = await createList({
-                  userId: user._id,
-                  category: "Favorites",
-                  privacy: false,
-                  games: []
-              });
-              console.log("Created Favorites list:", favoritesList);
-              setLists(prevLists => [...prevLists, favoritesList]);
-          }
-      } catch (error) {
-          console.error("Error checking/creating default lists:", error);
-      }
-  };
+  //         if (!hasFavorites) {
+  //             const favoritesList = await createList({
+  //                 userId: user._id,
+  //                 category: "Favorites",
+  //                 privacy: false,
+  //                 games: []
+  //             });
+  //             console.log("Created Favorites list:", favoritesList);
+  //             setLists(prevLists => [...prevLists, favoritesList]);
+  //         }
+  //     } catch (error) {
+  //         console.error("Error checking/creating default lists:", error);
+  //     }
+  // };
 
 
   
-    useEffect(() => {
-      if (user && username === user.username) {
-          fetchAndCreateDefaultLists();
-      } else {
-          getLists(username).then(setLists);
-      }
-      getUserUsername(username).then(setUserInfo);
-      getOneUserReviews(username).then(setReviews);   
-  }, [username, user]);
+  //   useEffect(() => {
+  //     if (user && username === user.username) {
+  //         fetchAndCreateDefaultLists();
+  //     } else {
+  //         getLists(username).then(setLists);
+  //     }
+  //     getUserUsername(username).then(setUserInfo);
+  //     getOneUserReviews(username).then(setReviews);   
+  // }, [username, user]);
+
+ 
+
 
   useEffect(() => {
       if (userInfo.friends) {
@@ -170,10 +173,12 @@ const Profile = () => {
       };
       
 
+  
+
     useEffect(() => {
-        getUserUsername(username).then(setUserInfo);
-        getLists(username).then(setLists);
-        getOneUserReviews(username).then(setReviews);   
+      getUserUsername(username).then(setUserInfo);
+      //getLists(username).then(setLists);
+      getOneUserReviews(username).then(setReviews);   
     }, [username]);
 
     useEffect(() => {
