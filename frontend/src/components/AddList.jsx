@@ -14,7 +14,7 @@ class AddList extends React.Component {
             return;
         }
         this.props.addListHandler(this.state);
-        this.setState({ category: "", privacy: false });
+        this.setState({ category: "", privacy: true });
         this.props.onCancel();
     };
 
@@ -33,7 +33,7 @@ class AddList extends React.Component {
                             onChange={(e) => this.setState({ category: e.target.value })}
                         />
                     </div>
-                    <div className="field">
+                    {/*<div className="field">
                         <label style={{ fontWeight: "bold" }}>Privacy:</label>
                         <select
                             name="privacy"
@@ -43,7 +43,7 @@ class AddList extends React.Component {
                             <option value="false">Public</option>
                             <option value="true">Private</option>
                         </select>
-                    </div>
+                    </div>*/}
                     <div className="button-group">
                         <button 
                             type="submit" 

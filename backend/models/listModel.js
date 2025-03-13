@@ -8,7 +8,7 @@ const listSchema = new mongoose.Schema({
     games: [String],
     privacy: {
         type: Boolean,
-        required: true
+        //required: true
     },
     category: {
         type: String, // 0 owned, 1 favorites, 2 custom
