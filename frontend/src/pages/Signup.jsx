@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useSignup } from '../hooks/useSignup';
+import { useListService } from '../services/listService';
 
 import "../styles/Auth.css";
 
@@ -8,12 +9,34 @@ import "../styles/Auth.css";
 const Signup = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
     const { signup, isLoading, error } = useSignup();
+
+    const { createList } = useListService(); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await signup(username, password);
+        const user = await signup(username, password);
+
+        if (user?.token) {
+            console.log(user.token, user._id);
+            await Promise.all([
+                createList({
+                    userId: user._id,
+                    category: "Library",
+                    privacy: false,
+                    games: []
+                }, user),
+                createList({
+                    userId: user._id,
+                    category: "Favorites",
+                    privacy: false,
+                    games: []
+                }, user)
+                
+            ])
+        }
     }
 
     return (
