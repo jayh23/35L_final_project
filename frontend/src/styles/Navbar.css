@@ -11,12 +11,15 @@
 }
 
 .navbar .nav-title {
-  padding: 20px 20px;
+  margin-left: 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .navbar .nav-title .logo {
-    height: 50px;
-    width: auto;
+  width: 250px;
 }
 
 .nav-links {
