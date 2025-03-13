@@ -1,4 +1,5 @@
 import { useAuthContext } from "../hooks/useAuthContext.js";
+import { Link } from "react-router-dom";
 import "../styles/Review.css";
 
 const GameReviews = ({ gameId, gameTitle, reviews = [] }) => {

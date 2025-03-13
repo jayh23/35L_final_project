@@ -24,11 +24,6 @@ export const useSignup = () => {
         // Parse the JSON response.
         const json = await response.json();
 
-        if (!response.ok) {
-            setIsLoading(false);
-            setError(json.error);
-        }
-
         // Handle successful signup.
         if (response.ok) {
             // Save the user to local storage.
@@ -38,7 +33,13 @@ export const useSignup = () => {
             dispatch({ type: 'LOGIN', payload: json });
 
             setIsLoading(false);
+
+            return json;
         }
+
+        setIsLoading(false);
+        setError(json.error);
+        return null;
     }
 
     // Return the signup function and state variables for use in components.

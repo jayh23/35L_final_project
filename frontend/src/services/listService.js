@@ -17,12 +17,12 @@ export const useListService = () => {
         }
     };
 
-    const createList = async (list) => {
+    const createList = async (list, u = user) => {
         try {
             const response = await fetch('/api/lists', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${user.token}`,
+                    'Authorization': `Bearer ${u.token}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(list),

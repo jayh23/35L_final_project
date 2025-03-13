@@ -23,6 +23,12 @@ body, html {
   text-align: center;
 }
 
+.trending-section, .no-friends-section {
+    flex-grow: 1;
+    margin-top: 30px;
+    text-align: center;
+}
+
 /* Game List (makes sure games display properly) */
 .home-container .game-list {
   display: flex;

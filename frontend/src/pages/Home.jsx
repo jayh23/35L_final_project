@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext.js";
 import "../styles/Home.css";
 
 const Home = () => {
+    const { user } = useAuthContext();
   const [trendingGames, setTrendingGames] = useState([]);
   const [popularGames, setPopularGames] = useState([]);
 
@@ -79,7 +81,8 @@ const Home = () => {
       </section>
 
       {/* Popular with Friends */}
-      <section className="friends-section">
+      {user ? (
+          <section className="friends-section">
         <h2>Popular with Friends</h2>
         <div className="carousel-container">
           {/* Left Arrow */}
@@ -104,7 +107,12 @@ const Home = () => {
             &gt;
           </button>
         </div>
-      </section>
+              </section>) : (
+                  <section className="no-friends-section">
+                  <h2>Log in to see what friends are playing!</h2>
+                  </section>
+              )
+  }
     </div>
   );
 };
