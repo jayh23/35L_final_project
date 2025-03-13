@@ -16,7 +16,6 @@ export const authReducer = (state, action) => {
 
 export const AuthContextProvider = ({ children }) => {
 
-
     // Initializes the state of the user to null so that no user
     // is logged in by default.
     const [state, dispatch] = useReducer(authReducer, null, () => {

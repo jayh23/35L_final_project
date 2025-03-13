@@ -17,7 +17,7 @@ export const useListService = () => {
         }
     };
 
-    const createList = async (list) => {
+    const createList = async (list, user = user) => {
         try {
             const response = await fetch('/api/lists', {
                 method: 'POST',
