@@ -44,7 +44,8 @@ const Game = () => {
     try {
       const response = await fetch('/api/reviews', {
         headers: {
-          'Authorization': `Bearer ${user.token}`,
+          //'Authorization': `Bearer ${user.token}`,
+          // Don't need to be signed in to view reviews
         },
       });
       const data = await response.json();
