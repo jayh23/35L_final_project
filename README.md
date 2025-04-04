@@ -30,16 +30,12 @@ npm install
 Create a file in the backend folder called `.env` and add the following text:
 
 ```
-MONGO_URI=mongodb+srv://cs35lteam:vLe6q1Vo90hqwIbb@cluster.fyoay.mongodb.net/game_app?retryWrites=true&w=majority&appName=Cluster
+MONGO_URI=[your MONGO_URI here]
 PORT=5000
 SECRET=cs35L
 ```
 
 The SECRET key can be any string you like.
-
-> [!CAUTION]
-> We are being nice and giving you backend access to our entire database. In a real application, we would not do this for obvious security reasons.
-> Please be nice and do not destroy our database. :slightly_smiling_face:
 
 **Running**
 
